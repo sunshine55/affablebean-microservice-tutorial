@@ -18,8 +18,8 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
-    public Category create(Category category) {
-        categoryRepository.insert(category);
-        return category;
+    public String upsert(Category category) {
+        categoryRepository.save(category);
+        return category.getId();
     }
 }

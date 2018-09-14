@@ -11,6 +11,8 @@
 
     <modules>
         <module>affablebean-ws</module>
+        <module>affablebean-ui</module>
+        <module>affablebean-admin</module>
     </modules>
 
     <properties>

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -24,8 +25,15 @@ public class CategoryController {
         return categoryService.fetch();
     }
 
-    @PostMapping("/create")
-    public Category create(@RequestBody Category category) {
-        return categoryService.create(category);
+    @PostMapping("/upsert")
+    public String upsert(@RequestBody Category category) {
+        return categoryService.upsert(category);
+    }
+
+    @PostMapping("/bulkUpsert")
+    public List<String> bulkUpsert(@RequestBody List<Category> categories) {
+        List<String> ids = new ArrayList<>();
+        categories.forEach(category -> ids.add(categoryService.upsert(category)));
+        return ids;
     }
 }

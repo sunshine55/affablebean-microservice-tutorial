@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>tvo.tutorial.microservice</groupId>
-	<artifactId>affablebean-ui</artifactId>
+	<artifactId>affablebean-admin</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>affablebean-ui</name>
-	<description>AffableBean frontend Spring Boot microservice tutorial</description>
+	<name>affablebean-admin</name>
+	<description>AffableBean admin Spring Boot microservice tutorial</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

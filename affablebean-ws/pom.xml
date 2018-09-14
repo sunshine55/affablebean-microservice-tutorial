@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>affablebean-ws</name>
-	<description>AffableBean backend Spring Boot microservice</description>
+	<description>AffableBean backend Spring Boot microservice tutorial</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
