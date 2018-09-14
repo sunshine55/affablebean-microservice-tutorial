@@ -16,6 +16,14 @@ services:
       - 2604:2604
     depends_on:
       - db
+  ui:
+    build: ./affablebean-ui
+    image: sunshine55/affablebean-ui:latest
+    container_name: ui_container
+    ports:
+      - 2605:2605
+    depends_on:
+      - ws
 
 networks:
   default:

@@ -1,0 +1,46 @@
+{
+  "name": "affablebean-ui",
+  "version": "1.0.0",
+  "description": "AffableBean frontend Spring Boot microservice tutorial",
+  "main": "webpack.config.js",
+  "scripts": {
+    "dev": "webpack --watch --debug --output-pathinfo --devtool eval --env.NODE_ENV=dev",
+    "prod": "webpack -p --devtool source-map --env.NODE_ENV=prod"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunshine55/affablebean-microservice-tutorial.git"
+  },
+  "keywords": [
+    "tvo",
+    "tutorial",
+    "microservice"
+  ],
+  "author": "sunshine55",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sunshine55/affablebean-microservice-tutorial/issues"
+  },
+  "homepage": "https://github.com/sunshine55/affablebean-microservice-tutorial#readme",
+  "devDependencies": {
+    "ajv": "^6.5.3",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.11",
+    "expose-loader": "^0.7.5",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^0.11.2",
+    "style-loader": "^0.23.0",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.12.0"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
+    "lodash": "^4.17.11",
+    "react": "^16.5.1",
+    "react-dom": "^16.5.1"
+  }
+}
