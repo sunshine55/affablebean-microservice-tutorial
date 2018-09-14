@@ -7,6 +7,7 @@
     <groupId>tvo.tutorial.microservice</groupId>
     <artifactId>affablebean</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
     <modules>
         <module>affablebean-ws</module>

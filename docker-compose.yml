@@ -1,0 +1,23 @@
+# https://docs.docker.com/compose/compose-file/#compose-and-docker-compatibility-matrix
+version: '3'
+
+# pulling images from docker hub instead of building images from source
+services:
+  db:
+    image: mongo:4.0.1
+    container_name: mongo_container
+    ports:
+      - 27017:27017
+  ws:
+    build: ./affablebean-ws
+    image: sunshine55/affablebean-ws:latest
+    container_name: ws_container
+    ports:
+      - 2604:2604
+    depends_on:
+      - db
+
+networks:
+  default:
+    external:
+      name: ms_tutorial
