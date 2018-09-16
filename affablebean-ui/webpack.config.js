@@ -1,7 +1,11 @@
 const path = require('path');
+const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const SOURCE_PATH = path.resolve(__dirname, './src/main/resources');
+const SOURCE_PATH = './src/main/resources';
+const VIEW_PATH = path.resolve(__dirname, `${SOURCE_PATH}/js`);
+const LIB_PATH = path.resolve(__dirname, `${SOURCE_PATH}/lib`);
+const BUILD_PATH = path.resolve(__dirname, `${SOURCE_PATH}/static/bundle`);
 
 const rules = [{
     test: /\.(js|jsx)$/,
@@ -30,10 +34,11 @@ module.exports = (env) => {
     }
     return {
         entry: {
-            category: `${SOURCE_PATH}/js/category/index.js`
+            category: `${VIEW_PATH}/category/index.js`,
+            vendor: ['babel-polyfill', `${LIB_PATH}/vendor.js`]
         },
         output: {
-            path: `${SOURCE_PATH}/static/bundle`,
+            path: BUILD_PATH,
             filename: '[name].bundle.js',
             sourceMapFilename: '[name].map.js'
         },
@@ -41,6 +46,13 @@ module.exports = (env) => {
             rules: rules
         },
         plugins: [
+            new webpack.ProvidePlugin({
+                $: 'jquery',
+                jQuery: 'jquery'
+            }),
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'vendor'
+            }),
             new ExtractTextPlugin('[name].bundle.css')
         ]
     };

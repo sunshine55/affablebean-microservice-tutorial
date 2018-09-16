@@ -11,5 +11,5 @@ class CategoryView extends Component {
     }
 }
 
-const rootEl = document.getElementById("content");
+const rootEl = document.getElementById('container');
 render(<CategoryView/>, rootEl);
