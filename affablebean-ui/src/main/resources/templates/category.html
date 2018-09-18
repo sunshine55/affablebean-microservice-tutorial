@@ -32,8 +32,8 @@
                 </li>
             </ul>
             <form class="form-inline">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
     </nav>
@@ -45,6 +45,6 @@
     </div>
 
     <script type="text/javascript" th:src="@{/bundle/vendor.bundle.js}"></script>
-    <script type="text/javascript" th:src="@{/bundle/category.bundle.js}"></script>
+    <script type="text/javascript" th:src="@{/bundle/{index}(index=${jsIndex})}"></script>
 </body>
 </html>
