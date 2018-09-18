@@ -3,11 +3,14 @@ package tvo.tutorial.microservice.ui;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/store")
 public class InitViewController {
+
+    @GetMapping("/")
+    public String viewHome() {
+        return "redirect:/category";
+    }
 
     @GetMapping("/category")
     public String viewCategory(ModelMap modelMap) {

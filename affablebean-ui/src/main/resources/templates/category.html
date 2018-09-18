@@ -1,14 +1,50 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.springframework.org/schema/mvc" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title th:text="${title}">Category</title>
+
     <link rel="stylesheet" type="text/css" th:href="@{/bundle/vendor.bundle.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/affablebean.css}"/>
 </head>
 <body>
-    <div id="container"></div>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" th:href="@{/}">AffableBean</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsAffableBean" aria-controls="navbarsAffableBean" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"/>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsAffableBean">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Checkout</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Languages</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="dropdown-item" href="#">English</a>
+                        <a class="dropdown-item" href="#">Español</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <div id="mainDiv"></div>
+
+    <div class="container">
+        <p class="text-muted credit">&copy; Developed by <a href="https://github.com/sunshine55?tab=repositories">sunshine55</a></p>
+    </div>
 
     <script type="text/javascript" th:src="@{/bundle/vendor.bundle.js}"></script>
-    <script type="text/javascript" th:src="@{/bundle/${#strings.toLowerCase(title)}.bundle.js}"></script>
+    <script type="text/javascript" th:src="@{/bundle/category.bundle.js}"></script>
 </body>
 </html>
