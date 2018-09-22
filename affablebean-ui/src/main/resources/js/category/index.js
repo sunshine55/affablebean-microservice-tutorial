@@ -10,7 +10,7 @@ class CategoryView extends Component {
     }
 
     componentDidMount() {
-        $.get('/category/fetch', (data) => this.setState({data: data}));
+        $.get('/ws/category/fetch', (data) => this.setState({data: data}));
     }
 
     render() {
