@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {render} from 'react-dom';
 
 class CategoryView extends Component {
     constructor(props) {
@@ -17,7 +16,7 @@ class CategoryView extends Component {
         let cols = [];
         this.state.data.forEach(datum => {
             cols.push(
-                <div className="col-md-3">
+                <div key={datum.id} className="col-md-3">
                     <div className="card md-3 box-shadow">
                         <img className="card-img-top" src={datum.imgUrl}/>
                         <div className="card-body">
@@ -39,5 +38,4 @@ class CategoryView extends Component {
     }
 }
 
-const rootEl = document.getElementById('mainDiv');
-render(<CategoryView/>, rootEl);
+export default CategoryView;

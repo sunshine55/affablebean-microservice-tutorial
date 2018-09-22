@@ -34,7 +34,7 @@ module.exports = (env) => {
     }
     return {
         entry: {
-            category: `${VIEW_PATH}/category/index.js`,
+            home: `${VIEW_PATH}/index.js`,
             vendor: ['babel-polyfill', `${LIB_PATH}/vendor.js`]
         },
         output: {

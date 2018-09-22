@@ -10,7 +10,6 @@ public class InitViewController {
     @GetMapping("/category")
     public String viewCategory(ModelMap modelMap) {
         modelMap.addAttribute("title", "Category");
-        modelMap.addAttribute("jsIndex", "category.bundle.js");
         return "category.html";
     }
 }
