@@ -6,27 +6,12 @@
 
     <groupId>tvo.tutorial.microservice</groupId>
     <artifactId>affablebean</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>affablebean-ws</module>
+        <module>affablebean-proxy</module>
         <module>affablebean-ui</module>
-        <module>affablebean-admin</module>
+        <module>affablebean-ws</module>
     </modules>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-    </properties>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 </project>

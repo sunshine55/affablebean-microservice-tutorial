@@ -8,22 +8,29 @@ services:
     container_name: mongo_container
     ports:
       - 27017:27017
-  ws:
-    build: ./affablebean-ws
-    image: sunshine55/affablebean-ws:latest
-    container_name: ws_container
+  proxy:
+    build: ./affablebean-proxy
+    image: sunshine55/affablebean-proxy:latest
+    container_name: proxy_container
     ports:
-      - 2604:2604
-    depends_on:
-      - db
+      - 2600:2600
+
   ui:
     build: ./affablebean-ui
     image: sunshine55/affablebean-ui:latest
     container_name: ui_container
     ports:
-      - 2605:2605
+      - 2601:2601
     depends_on:
       - ws
+  ws:
+    build: ./affablebean-ws
+    image: sunshine55/affablebean-ws:latest
+    container_name: ws_container
+    ports:
+      - 2602:2602
+    depends_on:
+      - db
 
 networks:
   default:
