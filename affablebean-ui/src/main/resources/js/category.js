@@ -27,12 +27,8 @@ class CategoryView extends Component {
             );
         });
         return (
-            <div className="py-5 bg-light">
-                <div className="container">
-                    <div className="row">
-                        {cols}
-                    </div>
-                </div>
+            <div className="container">
+                <div className="row">{cols}</div>
             </div>
         );
     }
