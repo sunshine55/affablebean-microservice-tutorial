@@ -16,6 +16,7 @@ mvn clean package
 ```
 
 #### Build
+
 Build to run locally
 ```
 docker build -t affablebean-proxy:latest affablebean-proxy
@@ -31,6 +32,7 @@ docker build -t <DOCKER_HUB_ID>/affablebean-ws affablebean-ws
 ```
 
 #### Run
+
 Verify images: `docker images` (supposed images are built to run locally)
 
 Run containers from the images at localhost:
@@ -47,3 +49,11 @@ docker run --name ws_container -p 2602:2602 --network ms_tutorial -d affablebean
 Create network: `docker network create ms_tutorial`
 
 Start up Docker Compose: `docker-compose up -d`
+
+## Usage
+
+The instance is running on port 2601 (ui service) and port 2602 (RESTful api) but access via proxy instance port 2600
+
+Using proxy localhost (ref.: affablebean-proxy's application.properties):
+* User Interface: access via port 2600, `/ui` context; i.e.: http://localhost:2600/ui/category
+* RESTful api: access via port 2600, `/ws` context; i.e.: http://localhost:2600/ws/category/fetch
