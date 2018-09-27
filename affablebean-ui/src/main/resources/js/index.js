@@ -1,15 +1,18 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {createStore} from 'redux';
-import {reduce} from "./reducer";
-import {initState} from "./state";
-import Home from "./containers/Home";
+import {Provider} from 'react-redux';
+import {rootReducer} from './reducers';
+import {initState} from './states';
+import Home from './components/Home';
 
-const store = createStore(reduce, initState());
-
-render(
-    <Provider store={store}>
-        <Home/>
-    </Provider>,
-    document.getElementById('wrap')
-);
+$.get('/ws/category/fetch', (categoryData) => {
+    const store = createStore(rootReducer, initState(categoryData));
+    
+    render(
+        <Provider store={store}>
+            <Home/>
+        </Provider>,
+        document.getElementById('wrap')
+    );
+});

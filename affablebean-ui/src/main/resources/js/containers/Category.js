@@ -1,15 +1,11 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 class Category extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            data: []
-        }
-    }
-
-    componentDidMount() {
-        $.get('/ws/category/fetch', (data) => this.setState({data: data}));
+        this.state = {data: this.props.categoryData}
     }
 
     render() {
@@ -34,4 +30,14 @@ class Category extends Component {
     }
 }
 
-export default Category;
+Category.propTypes = {
+    categoryData: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string,
+        imgUrl: PropTypes.string
+    }).isRequired
+};
+
+export default connect(
+    ({categoryData}) => ({categoryData})
+)(Category);
