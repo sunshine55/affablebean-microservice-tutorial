@@ -14,8 +14,8 @@ public class ItemService {
         this.itemRepository = itemRepository;
     }
 
-    public List<Item> fetch() {
-        return itemRepository.findAll();
+    public List<Item> fetch(String categoryId) {
+        return itemRepository.findByCategoryId(categoryId);
     }
 
     public String upsert(Item item) {

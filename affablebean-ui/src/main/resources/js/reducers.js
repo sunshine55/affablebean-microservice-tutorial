@@ -1,7 +1,7 @@
 import * as types from './types';
 
-function selectCategory(itemData) {
-
+function selectCategory(state, itemData) {
+    return Object.assign({}, state, {itemData: itemData});
 }
 
 export function rootReducer(state = {}, action) {

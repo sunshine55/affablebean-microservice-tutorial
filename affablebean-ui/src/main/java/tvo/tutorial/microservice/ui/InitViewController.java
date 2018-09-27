@@ -1,15 +1,13 @@
 package tvo.tutorial.microservice.ui;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class InitViewController {
 
-    @GetMapping("/category")
-    public String viewCategory(ModelMap modelMap) {
-        modelMap.addAttribute("title", "Category");
-        return "category.html";
+    @GetMapping("/home")
+    public String viewHome() {
+        return "index.html";
     }
 }

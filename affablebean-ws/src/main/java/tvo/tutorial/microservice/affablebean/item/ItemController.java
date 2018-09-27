@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -21,8 +22,8 @@ public class ItemController {
     }
 
     @GetMapping("/fetch")
-    public List<Item> fetch() {
-        return itemService.fetch();
+    public List<Item> fetch(@RequestParam("categoryId") String categoryId) {
+        return itemService.fetch(categoryId);
     }
 
     @PostMapping("/upsert")
