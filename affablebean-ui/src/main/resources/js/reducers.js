@@ -1,7 +1,11 @@
 import * as types from './types';
 
 function selectCategory(state, itemData) {
-    return Object.assign({}, state, {itemData: itemData});
+    return {
+        currentPage: 'item',
+        categoryData: state.categoryData,
+        itemData: itemData
+    };
 }
 
 export function rootReducer(state = {}, action) {

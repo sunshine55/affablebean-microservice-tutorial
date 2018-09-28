@@ -1,20 +1,25 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import {selectCategory} from '../actions';
 
 class Category extends Component {
     constructor(props) {
         super(props);
-        this.state = {data: this.props.categoryData}
+        this.onClick = this.onClick.bind(this);
+    }
+
+    onClick(e) {
+        this.props.dispatch(selectCategory(e.target.id));
     }
 
     render() {
         let cols = [];
-        this.state.data.forEach(datum => {
+        this.props.categoryData.forEach(datum => {
             cols.push(
                 <div key={datum.id} className="col-md-3">
                     <div className="card md-3 box-shadow">
-                        <img className="card-img-top" src={datum.imgUrl}/>
+                        <img id={datum.id} className="card-img-top" src={datum.imgUrl} onClick={this.onClick}/>
                         <div className="card-body">
                             <h4>{datum.name}</h4>
                         </div>
@@ -31,11 +36,11 @@ class Category extends Component {
 }
 
 Category.propTypes = {
-    categoryData: PropTypes.shape({
+    categoryData: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string.isRequired,
         name: PropTypes.string,
         imgUrl: PropTypes.string
-    }).isRequired
+    })).isRequired
 };
 
 export default connect(

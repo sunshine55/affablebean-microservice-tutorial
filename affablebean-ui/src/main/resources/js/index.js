@@ -5,7 +5,7 @@ import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {rootReducer} from './reducers';
 import {initState} from './states';
-import Home from './components/Home';
+import Home from './containers/Home';
 
 $.get('/ws/category/fetch', (categoryData) => {
     const store = createStore(rootReducer, initState(categoryData), applyMiddleware(thunk));
