@@ -26,5 +26,4 @@ nbdist/
 
 ### NodeJS ###
 node_modules/
-package-lock.json
 bundle/

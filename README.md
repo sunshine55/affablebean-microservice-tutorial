@@ -55,5 +55,5 @@ Start up Docker Compose: `docker-compose up -d`
 The instance is running on port 2601 (ui service) and port 2602 (RESTful api) but access via proxy instance port 2600
 
 Using proxy localhost (ref.: affablebean-proxy's application.properties):
-* User Interface: access via port 2600, `/ui` context; i.e.: http://localhost:2600/ui/category
+* User Interface: access via port 2600, `/ui` context; i.e.: http://localhost:2600/ui
 * RESTful api: access via port 2600, `/ws` context; i.e.: http://localhost:2600/ws/category/fetch
