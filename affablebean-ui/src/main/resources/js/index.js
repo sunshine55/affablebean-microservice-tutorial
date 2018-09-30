@@ -6,8 +6,9 @@ import thunk from 'redux-thunk';
 import {rootReducer} from './reducers';
 import {initState} from './states';
 import Home from './containers/Home';
+import {FETCH_CATEGORY_URL} from './types';
 
-$.get('/ws/category/fetch', (categoryData) => {
+$.get(FETCH_CATEGORY_URL, (categoryData) => {
     const store = createStore(rootReducer, initState(categoryData), applyMiddleware(thunk));
     
     render(

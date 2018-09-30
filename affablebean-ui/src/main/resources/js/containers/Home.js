@@ -5,7 +5,7 @@ import Jumbotron from '../components/Jumbotron';
 import Navbar from '../components/Navbar';
 import Category from '../components/Category';
 import Item from '../components/Item';
-import {selectCategory} from '../actions';
+import {selectCategory, selectNav} from '../actions';
 
 class Home extends Component {
     constructor(props) {
@@ -16,10 +16,17 @@ class Home extends Component {
         this.itemActions = {
             selectCategory: this.onCategoryClick.bind(this)
         };
+        this.navActions = {
+            selectNav: this.onNavClick.bind(this)
+        };
     }
 
     onCategoryClick(e) {
         this.props.dispatch(selectCategory(e.target.id));
+    }
+
+    onNavClick(e) {
+        this.props.dispatch(selectNav(parseInt(e.target.id)));
     }
 
     render() {
@@ -34,7 +41,7 @@ class Home extends Component {
 
         return (
             <div>
-                <Navbar/>
+                <Navbar data={this.props.navData} actions={this.navActions}/>
                 <Jumbotron/>
                 {page}
             </div>
@@ -43,5 +50,5 @@ class Home extends Component {
 }
 
 export default connect(
-    ({currentPage, categoryData, itemData}) => ({currentPage, categoryData, itemData})
+    ({currentPage, categoryData, itemData, navData}) => ({currentPage, categoryData, itemData, navData})
 )(Home);

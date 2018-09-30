@@ -8,6 +8,10 @@ export function initState(categoryData) {
             currentCategory: '',
             items: [],
             categories: []
+        },
+        navData: {
+            currentNav: -1,
+            navItems: ['Cart', 'Checkout']
         }
     };
 }

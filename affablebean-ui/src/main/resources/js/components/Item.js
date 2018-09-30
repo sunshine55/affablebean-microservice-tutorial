@@ -6,7 +6,7 @@ const Item = ({data, actions}) => {
         const css = (data.currentCategory === datum.id) ? 'nav-link active' : 'nav-link';
         return (
             <li key={datum.id} className="nav-item">
-                <a id={datum.id} className={css} onClick={actions.selectCategory}>{datum.name}</a>
+                <span id={datum.id} className={`${css} c-pointer`} onClick={actions.selectCategory}>{datum.name}</span>
             </li>
         );
     });
@@ -14,7 +14,7 @@ const Item = ({data, actions}) => {
     const tabContent = data.items.map(datum => (
         <div key={datum.id} className="col-md-3">
             <figure className="figure">
-                <img id={datum.id} className="figure-img img-fluid rounded" src={datum.imgUrl}/>
+                <img id={datum.id} className="figure-img img-fluid c-pointer" src={datum.imgUrl}/>
                 <figcaption className="figure-caption">
                     <p><b>{datum.name}</b></p>
                     <p>{`Price: ${datum.price}`}</p>
@@ -26,10 +26,10 @@ const Item = ({data, actions}) => {
     return (
         <div className="container">
             <div className="row">
-                <div className="col-md-3">
+                <div className="col-md-2">
                     <ul className="nav nav-pills flex-column">{navList}</ul>
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-10">
                     <div className="row tab-content">{tabContent}</div>
                 </div>
             </div>

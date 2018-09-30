@@ -5,3 +5,7 @@
 body {
     padding-top: 3.5rem;
 }
+
+.c-pointer {
+    cursor: pointer;
+}
