@@ -4,17 +4,17 @@ import PropTypes from 'prop-types';
 const Navbar = ({data, actions}) => {
     let navItems = [];
     data.navItems.forEach((datum, idx) => {
-        const css = (data.currentNav === idx) ? 'nav-item active' : 'nav-item';
+        let css = (data.currentNav === idx ? 'nav-item active' : 'nav-item');
+        let badge = datum === 'Cart' ? (<span className="badge badge-pill badge-light">{data.cartQuantity}</span>) : null;
         navItems.push(
             <li key={`nav-${idx}`} className={css}>
-                <span id={idx} className="nav-link c-pointer" onClick={actions.selectNav}>{datum}</span>
+                <div id={idx} className="nav-link c-pointer" onClick={actions.selectNav}>{datum} {badge}</div>
             </li>
         );
     });
     return (
         <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <span id="-1" className="navbar-brand c-pointer" onClick={actions.selectNav}>AffableBean</span>
-
             <div className="collapse navbar-collapse">
                 <ul className="navbar-nav mr-auto">{navItems}</ul>
                 <form className="form-inline">
@@ -29,7 +29,8 @@ const Navbar = ({data, actions}) => {
 Navbar.propTypes = {
     data: PropTypes.shape({
         currentNav: PropTypes.number,
-        navItems: PropTypes.array
+        navItems: PropTypes.array,
+        cartQuantity: PropTypes.number
     }),
     actions: PropTypes.shape({
         selectNav: PropTypes.func

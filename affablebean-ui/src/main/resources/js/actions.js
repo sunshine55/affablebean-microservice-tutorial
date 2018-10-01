@@ -8,6 +8,11 @@ export const selectNav = (navId) => (dispatch) => {
                 categories: data
             });
         });
+    } else {
+        dispatch({
+            type: types.SELECT_NAV,
+            navId: navId
+        });
     }
 };
 
@@ -20,3 +25,22 @@ export const selectCategory = (categoryId) => (dispatch) => {
         });
     });
 };
+
+export function addCart(itemId) {
+    return {
+        type: types.ADD_CART,
+        itemId: itemId
+    };
+}
+
+export function clearCart() {
+    return {type: types.CLEAR_CART};
+}
+
+export function updateQuantity(itemId, updateType) {
+    return {
+        type: types.UPDATE_QUANTITY,
+        itemId: itemId,
+        updateType: updateType
+    }
+}

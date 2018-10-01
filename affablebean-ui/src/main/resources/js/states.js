@@ -11,7 +11,9 @@ export function initState(categoryData) {
         },
         navData: {
             currentNav: -1,
-            navItems: ['Cart', 'Checkout']
-        }
+            navItems: ['Cart', 'Checkout'],
+            cartQuantity: 0
+        },
+        cartData: {}
     };
 }

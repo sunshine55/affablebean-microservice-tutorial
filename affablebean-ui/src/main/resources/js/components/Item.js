@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Item = ({data, actions}) => {
     const navList = data.categories.map(datum => {
-        const css = (data.currentCategory === datum.id) ? 'nav-link active' : 'nav-link';
+        const css = (data.currentCategory === datum.id ? 'nav-link active' : 'nav-link');
         return (
             <li key={datum.id} className="nav-item">
                 <span id={datum.id} className={`${css} c-pointer`} onClick={actions.selectCategory}>{datum.name}</span>
@@ -14,10 +14,11 @@ const Item = ({data, actions}) => {
     const tabContent = data.items.map(datum => (
         <div key={datum.id} className="col-md-3">
             <figure className="figure">
-                <img id={datum.id} className="figure-img img-fluid c-pointer" src={datum.imgUrl}/>
+                <img className="figure-img img-fluid c-pointer" src={datum.imgUrl}/>
                 <figcaption className="figure-caption">
                     <p><b>{datum.name}</b></p>
                     <p>{`Price: ${datum.price}`}</p>
+                    <button id={datum.id} className="btn btn-outline-primary" onClick={actions.addCart}>Add Cart</button>
                 </figcaption>
             </figure>
         </div>
@@ -53,7 +54,8 @@ Item.propTypes = {
         }))
     }),
     actions: PropTypes.shape({
-        selectCategory: PropTypes.func
+        selectCategory: PropTypes.func,
+        addCart: PropTypes.func
     })
 };
 
