@@ -14,23 +14,35 @@ services:
     container_name: proxy_container
     ports:
       - 2600:2600
-
-  ui:
-    build: ./affablebean-ui
-    image: sunshine55/affablebean-ui:latest
-    container_name: ui_container
-    ports:
-      - 2601:2601
     depends_on:
       - ws
+      - ui
+      - admin
+
   ws:
     build: ./affablebean-ws
     image: sunshine55/affablebean-ws:latest
     container_name: ws_container
     ports:
-      - 2602:2602
+      - 2601:2601
     depends_on:
       - db
+  ui:
+    build: ./affablebean-ui
+    image: sunshine55/affablebean-ui:latest
+    container_name: ui_container
+    ports:
+      - 2602:2602
+    depends_on:
+      - ws
+  admin:
+    build: ./affablebean-admin
+    image: sunshine55/affablebean-admin:latest
+    container_name: admin_container
+    ports:
+      - 2603:2603
+    depends_on:
+      - ws
 
 networks:
   default:
