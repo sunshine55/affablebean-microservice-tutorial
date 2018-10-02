@@ -7,10 +7,11 @@
 
     <link rel="stylesheet" type="text/css" th:href="@{/admin/bundle/vendor.bundle.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/admin/css/affablebean.css}"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"/>
 </head>
 <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-        <a class="navbar-brand col-md-2 mr-0" th:href="@{/}">AffableBean</a>
+        <a class="navbar-brand col-md-2 mr-0" th:href="@{/}">AffableBean Admin</a>
         <input class="form-control form-control-dark w-100" type="text" placeholder="Search"/>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
@@ -25,7 +26,14 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" th:classappend="${currentPage == 'category' ? 'active' : ''}" th:href="@{/admin/category}">Category</a>
+                            <a class="nav-link" th:classappend="${currentPage == 'category' ? 'active' : ''}" th:href="@{/admin/category}">
+                                <i class="fas fa-th-large"></i> Category Management
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:classappend="${currentPage == 'item' ? 'active' : ''}" th:href="@{/admin/item}">
+                                <i class="fas fa-list"></i> Item Management
+                            </a>
                         </li>
                     </ul>
                 </div>
