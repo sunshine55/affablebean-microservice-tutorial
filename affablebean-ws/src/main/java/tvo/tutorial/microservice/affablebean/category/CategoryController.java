@@ -25,15 +25,10 @@ public class CategoryController {
         return categoryService.fetch();
     }
 
-    @PostMapping("/upsert")
-    public String upsert(@RequestBody Category category) {
-        return categoryService.upsert(category);
-    }
-
     @PostMapping("/bulkUpsert")
-    public List<String> bulkUpsert(@RequestBody List<Category> categories) {
-        List<String> ids = new ArrayList<>();
-        categories.forEach(category -> ids.add(categoryService.upsert(category)));
-        return ids;
+    public List<Category> bulkUpsert(@RequestBody List<Category> categories) {
+        List<Category> result = new ArrayList<>();
+        categories.forEach(category -> result.add(categoryService.upsert(category)));
+        return result;
     }
 }

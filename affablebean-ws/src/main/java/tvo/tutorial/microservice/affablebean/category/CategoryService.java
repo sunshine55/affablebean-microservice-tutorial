@@ -18,8 +18,13 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
-    public String upsert(Category category) {
+    /**
+     * impure function to update or insert
+     * @param category updates if category.id exists; insert if category.id is not found or blank
+     * @return category with id assigned (insert) and updated fields (update)
+     */
+    public Category upsert(Category category) {
         categoryRepository.save(category);
-        return category.getId();
+        return category;
     }
 }
