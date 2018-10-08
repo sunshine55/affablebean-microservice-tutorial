@@ -2,6 +2,7 @@ package tvo.tutorial.microservice.affablebean.category;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -24,7 +25,14 @@ public class CategoryService {
      * @return category with id assigned (insert) and updated fields (update)
      */
     public Category upsert(Category category) {
+        if (StringUtils.isEmpty(category.getId())) {
+            category.setId(null);
+        }
         categoryRepository.save(category);
         return category;
+    }
+
+    public void delete(Category category) {
+        categoryRepository.delete(category);
     }
 }

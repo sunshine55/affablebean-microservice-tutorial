@@ -22,13 +22,14 @@ class CategoryView extends Component {
             resizable: true,
             editable: true
         }];
+        this._selRows = [];
         this.state = {rows: []};
-        this.handleGridRowsUpdated = this.handleGridRowsUpdated.bind(this);
+        this.handleRowGetter = this.handleRowGetter.bind(this);
         this.handleRowSelect = this.handleRowSelect.bind(this);
+        this.handleGridRowsUpdated = this.handleGridRowsUpdated.bind(this);
 
         this.handleAddRow = this.handleAddRow.bind(this);
-        this.handleDeleteRows = this.handleDeleteRows.bind(this);
-        this.handleSaveRows = this.handleSaveRows.bind(this);
+        this.handleSyncRows = this.handleSyncRows.bind(this);
         this.handleFetchRows = this.handleFetchRows.bind(this);
     }
 
@@ -36,32 +37,42 @@ class CategoryView extends Component {
         this.handleFetchRows();
     }
 
+    handleRowGetter(index) {
+        return (0 <= index < this.state.rows.length) ? this.state.rows[index] : undefined;
+    }
+
+    handleRowSelect(rows) {
+        this._selRows = rows;
+    }
+
     handleGridRowsUpdated({fromRow, toRow, updated}) {
         let rows = this.state.rows.slice();
         let i = fromRow;
         while (i <= toRow) {
-            let rowToUpdate = rows[i];
-            rows[i] = update(rowToUpdate, {$merge: updated});
+            rows[i] = update(this.state.rows[i], {$merge: updated});
             i++;
         }
         this.setState({rows});
     }
 
-    handleRowSelect(row) {
-        console.log(row);
-    }
-
     handleAddRow() {
         let nextRow = {};
-        this._cols.filter(col => col.key !== 'id').forEach(col => nextRow[col.key] = '');
-        let rows = this.state.rows.slice();
-        rows = update(rows, {$push: [nextRow]});
+        this._cols.forEach(col => nextRow[col.key] = '');
+        const rows = update(this.state.rows, {$push: [nextRow]});
         this.setState({rows});
     }
 
-    handleDeleteRows() {}
-
-    handleSaveRows() {}
+    handleSyncRows(e) {
+        if (this._selRows.length > 0) {
+            const url = (e.target.name === 'upsert' ? api.CATEGORY_API_BULK_UPSERT : api.CATEGORY_API_BULK_DELETE);
+            api.post(url, this._selRows, (rows) => {
+                if (rows.length > 0) {
+                    this._selRows = [];
+                    this.setState({rows});
+                }
+            });
+        }
+    }
 
     handleFetchRows() {
         $.get(api.CATEGORY_API_FETCH, (rows) => this.setState({rows}));
@@ -74,11 +85,12 @@ class CategoryView extends Component {
                 <p className="text-right text-info">Choose row(s) to persist to database by selecting checkboxes then clicking Save or Delete</p>
                 <ReactDataGrid
                     columns={this._cols}
+                    enableCellSelect={true}
                     enableRowSelect={true}
                     minHeight={500}
                     onGridRowsUpdated={this.handleGridRowsUpdated}
                     onRowSelect={this.handleRowSelect}
-                    rowGetter={(i) => this.state.rows[i]}
+                    rowGetter={this.handleRowGetter}
                     rowsCount={this.state.rows.length}/>
                 <div className="row mt-2">
                     <div className="col-md-6">
@@ -86,8 +98,8 @@ class CategoryView extends Component {
                     </div>
                     <div className="col-md-6">
                         <div className="btn-group float-right">
-                            <input type="button" className="btn btn-outline-primary mr-2" value="Save" onClick={this.handleSaveRows}/>
-                            <input type="button" className="btn btn-outline-danger mr-2" value="Delete" onClick={this.handleDeleteRows}/>
+                            <input type="button" className="btn btn-outline-primary mr-2" name="upsert" value="Save" onClick={this.handleSyncRows}/>
+                            <input type="button" className="btn btn-outline-danger mr-2"  name="delete" value="Delete" onClick={this.handleSyncRows}/>
                             <input type="button" className="btn btn-outline-warning" value="Reset" onClick={this.handleFetchRows}/>
                         </div>
                     </div>
