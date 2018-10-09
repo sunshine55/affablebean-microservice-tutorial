@@ -7,7 +7,11 @@ class ItemView extends Component {
     }
 
     render() {
-        return (<h1 className="h2">Item Management</h1>);
+        return (
+            <div>
+                <h1 className="h2">Item Management</h1><hr/>
+            </div>
+        );
     }
 }
 
