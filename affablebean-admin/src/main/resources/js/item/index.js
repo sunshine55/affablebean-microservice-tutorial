@@ -11,4 +11,4 @@ class ItemView extends Component {
     }
 }
 
-render(<ItemView/>, document.getElementById("wrap"));
+render(<ItemView/>, document.getElementById('wrap'));
