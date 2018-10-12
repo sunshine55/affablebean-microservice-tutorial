@@ -1,50 +1,58 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
 import * as api from '../../lib/api';
-import BootstrapTable from 'react-bootstrap-table-next';
-import cellEditFactory from 'react-bootstrap-table2-editor';
+import ReactTable from 'react-table';
 
 class CategoryView extends Component {
     constructor(props) {
         super(props);
-        this._cols = [{
-            dataField: 'id',
-            text: 'ID'
+        this.state = {data: this.props.data};
+        this.renderEditable = this.renderEditable.bind(this);
+        this.renderColumns = this.renderColumns.bind(this);
+    }
+
+    renderEditable(cellInfo) {
+        const onBlur = (e) => {
+            const data = [...this.state.data];
+            data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
+            this.setState({data});
+        };
+        return (
+            <div
+                style={{backgroundColor: '#fafafa'}}
+                contentEditable
+                suppressContentEditableWarning
+                onBlur={onBlur}
+                dangerouslySetInnerHTML={{__html: this.state.data[cellInfo.index][cellInfo.column.id]}}
+            />
+        );
+    }
+
+    renderColumns() {
+        return [{
+            accessor: 'id',
+            Header: 'ID'
         }, {
-            dataField: 'name',
-            text: 'Category Name'
+            accessor: 'name',
+            Header: 'Category Name',
+            Cell: this.renderEditable
         }, {
-            dataField: 'imgUrl',
-            text: 'Image URL'
+            accessor: 'imgUrl',
+            Header: 'Image URL',
+            Cell: this.renderEditable
         }];
-        this.state = {data: []};
-        this._rows = {};
-        this.handleSaveCell = this.handleSaveCell.bind(this);
-    }
-
-    componentDidMount() {
-        $.get(api.CATEGORY_API_FETCH, (data) => {
-            data.forEach(datum => this._rows[datum.id] = datum);
-            this.setState({data})
-        });
-    }
-
-    handleSaveCell(oldValue, newValue, row, column) {
-        this._rows[row.id][column.dataField] = newValue;
     }
 
     render() {
-        const cellEdit = cellEditFactory({mode: 'click', blurToSave: true, afterSaveCell: this.handleSaveCell});
         return (
             <div>
                 <h1 className="h2">Category Management</h1><hr/>
-                <BootstrapTable
-                    columns={this._cols} data={this.state.data} keyField='id'
-                    hover={true} bootstrap4={true}
-                    cellEdit={cellEdit}/>
+                <ReactTable
+                    columns={this.renderColumns()} data={this.state.data}
+                    defaultPageSize={10} className="-striped -highlight"/>
             </div>
         );
     }
 }
 
-render(<CategoryView/>, document.getElementById('wrap'));
+$.get(api.CATEGORY_API_FETCH, (data) => render(<CategoryView data={data}/>, document.getElementById('wrap')));
