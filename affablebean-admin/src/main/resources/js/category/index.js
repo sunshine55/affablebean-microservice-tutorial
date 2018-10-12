@@ -18,22 +18,30 @@ class CategoryView extends Component {
             text: 'Image URL'
         }];
         this.state = {data: []};
+        this._rows = {};
+        this.handleSaveCell = this.handleSaveCell.bind(this);
     }
 
     componentDidMount() {
-        $.get(api.CATEGORY_API_FETCH, (data) => this.setState({data}));
+        $.get(api.CATEGORY_API_FETCH, (data) => {
+            data.forEach(datum => this._rows[datum.id] = datum);
+            this.setState({data})
+        });
+    }
+
+    handleSaveCell(oldValue, newValue, row, column) {
+        this._rows[row.id][column.dataField] = newValue;
     }
 
     render() {
-        const cellEdit = cellEditFactory({
-            mode: 'click',
-            blurToSave: true
-
-        });
+        const cellEdit = cellEditFactory({mode: 'click', blurToSave: true, afterSaveCell: this.handleSaveCell});
         return (
             <div>
                 <h1 className="h2">Category Management</h1><hr/>
-                <BootstrapTable columns={this._cols} data={this.state.data} bootstrap4={true} keyField='id' cellEdit={cellEdit} hover={true}/>
+                <BootstrapTable
+                    columns={this._cols} data={this.state.data} keyField='id'
+                    hover={true} bootstrap4={true}
+                    cellEdit={cellEdit}/>
             </div>
         );
     }
