@@ -1,106 +1,143 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
-import update from 'immutability-helper';
-import ReactDataGrid from 'react-data-grid';
 import * as api from '../../lib/api';
+import ReactTable from 'react-table';
+import checkboxHOC from 'react-table/lib/hoc/selectTable';
+
+const CheckboxTable = checkboxHOC(ReactTable);
+
+function getData(data) {
+    let nextData = [];
+    data.forEach((datum, idx) => {
+        let item = Object.assign({}, datum, {_id: idx});
+        nextData.push(item);
+    });
+    return nextData;
+}
 
 class CategoryView extends Component {
     constructor(props) {
         super(props);
-        this._cols = [{
-            key: 'id',
-            name: 'ID',
-            width: 220
-        }, {
-            key: 'name',
-            name: 'Category Name',
-            width: 140,
-            editable: true
-        }, {
-            key: 'imgUrl',
-            name: 'Image URL',
-            resizable: true,
-            editable: true
-        }];
-        this._selRows = [];
-        this.state = {rows: []};
-        this.handleRowGetter = this.handleRowGetter.bind(this);
-        this.handleRowSelect = this.handleRowSelect.bind(this);
-        this.handleGridRowsUpdated = this.handleGridRowsUpdated.bind(this);
-
-        this.handleAddRow = this.handleAddRow.bind(this);
-        this.handleSyncRows = this.handleSyncRows.bind(this);
-        this.handleFetchRows = this.handleFetchRows.bind(this);
+        this.renderEditable = this.renderEditable.bind(this);
+        this.toggleSelection = this.toggleSelection.bind(this);
+        this.toggleAll = this.toggleAll.bind(this);
+        this.isSelected = this.isSelected.bind(this);
+        this.state = {
+            columns: [{
+                accessor: 'id',
+                Header: 'ID'
+            }, {
+                accessor: 'name',
+                Header: 'Category Name',
+                Cell: this.renderEditable
+            }, {
+                accessor: 'imgUrl',
+                Header: 'Image URL',
+                Cell: this.renderEditable
+            }],
+            data: this.props.data,
+            selection: [],
+            selectAll: false
+        };
+        this.handleReset = this.handleReset.bind(this);
+        this.handleCreate = this.handleCreate.bind(this);
+        this.handleSave = this.handleSave.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
-    componentDidMount() {
-        this.handleFetchRows();
+    renderEditable(cellInfo) {
+        const onBlur = (e) => {
+            const data = [...this.state.data];
+            data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
+            this.setState({data});
+        };
+        return (
+            <div
+                style={{backgroundColor: '#fafafa'}}
+                contentEditable
+                suppressContentEditableWarning
+                onBlur={onBlur}
+                dangerouslySetInnerHTML={{__html: this.state.data[cellInfo.index][cellInfo.column.id]}}
+            />
+        );
     }
 
-    handleRowGetter(index) {
-        return (0 <= index < this.state.rows.length) ? this.state.rows[index] : undefined;
-    }
-
-    handleRowSelect(rows) {
-        this._selRows = rows;
-    }
-
-    handleGridRowsUpdated({fromRow, toRow, updated}) {
-        let rows = this.state.rows.slice();
-        let i = fromRow;
-        while (i <= toRow) {
-            rows[i] = update(this.state.rows[i], {$merge: updated});
-            i++;
+    toggleSelection(key, shift, row) {
+        let selection = [...this.state.selection];
+        const keyIndex = selection.indexOf(key);
+        if (keyIndex >= 0) {
+            selection = [...selection.slice(0, keyIndex), ...selection.slice(keyIndex + 1)];
+        } else {
+            selection.push(key);
         }
-        this.setState({rows});
+        this.setState({selection});
     }
 
-    handleAddRow() {
-        let nextRow = {};
-        this._cols.forEach(col => nextRow[col.key] = '');
-        const rows = update(this.state.rows, {$push: [nextRow]});
-        this.setState({rows});
+    toggleAll() {
+        const selectAll = !this.state.selectAll;
+        let selection = [];
+        if (selectAll) {
+            const wrappedInstance = this.checkboxTable.getWrappedInstance();
+            const currentRecords = wrappedInstance.getResolvedState().sortedData;
+            currentRecords.forEach(item => selection.push(item._original._id));
+        }
+        this.setState({selectAll, selection});
     }
 
-    handleSyncRows(e) {
-        if (this._selRows.length > 0) {
-            const url = (e.target.name === 'upsert' ? api.CATEGORY_API_BULK_UPSERT : api.CATEGORY_API_BULK_DELETE);
-            api.post(url, this._selRows, (rows) => {
-                if (rows.length > 0) {
-                    this._selRows = [];
-                    this.setState({rows});
-                }
+    isSelected(key) {
+        return this.state.selection.includes(key);
+    }
+
+    handleReset() {
+        $.get(api.CATEGORY_API_FETCH, (data) => this.setState({data: getData(data)}));
+    }
+
+    handleCreate() {
+        let datum = {};
+        datum._id = this.state.data.length;
+        this.state.columns.forEach(col => datum[col.accessor] = '');
+        const data = [...this.state.data, datum];
+        this.setState({data});
+    }
+
+    handleSave() {
+        api.post(api.CATEGORY_API_BULK_UPSERT, this.state.data, (data) => this.setState({data: getData(data)}));
+    }
+
+    handleDelete() {
+        if (this.state.selection.length !== 0) {
+            let deletedRows = [];
+            this.state.selection.forEach(_id => {
+                const deletedRow = this.state.data.filter(datum => datum._id === _id)[0];
+                deletedRows.push(deletedRow);
             });
+            api.post(api.CATEGORY_API_BULK_DELETE, deletedRows, (data) => this.setState({data: getData(data)}));
         }
-    }
-
-    handleFetchRows() {
-        $.get(api.CATEGORY_API_FETCH, (rows) => this.setState({rows}));
     }
 
     render() {
+        const {toggleSelection, toggleAll, isSelected} = this;
+        const {data, columns, selectAll} = this.state;
+
+        const checkboxProps = {selectAll, isSelected, toggleSelection, toggleAll, selectType: 'checkbox'};
+
         return (
             <div>
                 <h1 className="h2">Category Management</h1><hr/>
-                <p className="text-right text-info">Choose row(s) to persist to database by selecting checkboxes then clicking Save or Delete</p>
-                <ReactDataGrid
-                    columns={this._cols}
-                    enableCellSelect={true}
-                    enableRowSelect={true}
-                    minHeight={500}
-                    onGridRowsUpdated={this.handleGridRowsUpdated}
-                    onRowSelect={this.handleRowSelect}
-                    rowGetter={this.handleRowGetter}
-                    rowsCount={this.state.rows.length}/>
+                <CheckboxTable
+                    ref={r => this.checkboxTable = r}
+                    columns={columns} data={data} {...checkboxProps}
+                    defaultPageSize={10} className="-striped -highlight"
+                />
                 <div className="row mt-2">
                     <div className="col-md-6">
-                        <input type="button" className="btn btn-outline-success mr-2" value="Create" onClick={this.handleAddRow}/>
+                        <input type="button" className="btn btn-outline-success mr-2" value="Create" onClick={this.handleCreate}/>
+                        <input type="button" className="btn btn-outline-danger" value="Delete" onClick={this.handleDelete}/>
                     </div>
                     <div className="col-md-6">
-                        <div className="btn-group float-right">
-                            <input type="button" className="btn btn-outline-primary mr-2" name="upsert" value="Save" onClick={this.handleSyncRows}/>
-                            <input type="button" className="btn btn-outline-danger mr-2"  name="delete" value="Delete" onClick={this.handleSyncRows}/>
-                            <input type="button" className="btn btn-outline-warning" value="Reset" onClick={this.handleFetchRows}/>
+                        <div className="float-right">
+                            <input type="button" className="btn btn-outline-primary mr-2" value="Save" onClick={this.handleSave}/>
+                            <input type="button" className="btn btn-outline-warning" value="Reset" onClick={this.handleReset}/>
                         </div>
                     </div>
                 </div>
@@ -109,4 +146,4 @@ class CategoryView extends Component {
     }
 }
 
-render(<CategoryView/>, document.getElementById('wrap'));
+$.get(api.CATEGORY_API_FETCH, (data) => render(<CategoryView data={getData(data)}/>, document.getElementById('wrap')));
