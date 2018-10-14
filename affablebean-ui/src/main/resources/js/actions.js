@@ -17,7 +17,7 @@ export const selectNav = (navId) => (dispatch) => {
 };
 
 export const selectCategory = (categoryId) => (dispatch) => {
-    $.get(types.FETCH_ITEM_URL + categoryId, (data) => {
+    $.get(`${types.FETCH_ITEM_URL}/${categoryId}`, (data) => {
         dispatch({
             type: types.SELECT_CATEGORY,
             selectedCategoryId: categoryId,
