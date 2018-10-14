@@ -12,7 +12,7 @@ export const post = (url, data, callback) => {
         data: JSON.stringify(data),
         type: 'POST',
         contentType: 'application/json; charset=utf-8',
-        timeout: 54000
+        timeout: 60000
     }).then(
         (responseData) => callback(responseData),
         (e) => alert(`HTTP ${e.status}: ${e.responseJSON.error}!`)

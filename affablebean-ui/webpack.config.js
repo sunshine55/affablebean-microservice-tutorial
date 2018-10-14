@@ -51,7 +51,8 @@ module.exports = (env) => {
                 jQuery: 'jquery'
             }),
             new webpack.optimize.CommonsChunkPlugin({
-                name: 'vendor'
+                name: 'vendor',
+                minChunks: Infinity
             }),
             new ExtractTextPlugin('[name].bundle.css')
         ]
