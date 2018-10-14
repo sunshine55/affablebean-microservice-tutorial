@@ -6,7 +6,7 @@ const Cart = ({data, actions}) => {
     let rows = [];
     Object.keys(data).forEach(key => {
         const datum = data[key];
-        const subtotal = parseFloat((datum.price * datum.quantity).toFixed(2));
+        const subtotal = parseFloat((datum.price * datum.quantity).toFixed(10));
         total += subtotal;
         rows.push(
             <tr key={key}>
@@ -32,7 +32,7 @@ const Cart = ({data, actions}) => {
             <div className="row">
                 <div className="col-md-3">
                     <div className="jumbotron">
-                        <h4>{`Total: ${parseFloat(total.toFixed(2))}`}</h4>
+                        <h4>{`Total: ${parseFloat(total.toFixed(10))}`}</h4>
                         <button className="btn btn-danger" onClick={actions.clearCart}>Clear Cart</button>
                     </div>
                 </div>
