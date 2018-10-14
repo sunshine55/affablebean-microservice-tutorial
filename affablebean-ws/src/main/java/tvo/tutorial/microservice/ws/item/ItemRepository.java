@@ -1,4 +1,4 @@
-package tvo.tutorial.microservice.affablebean.item;
+package tvo.tutorial.microservice.ws.item;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;

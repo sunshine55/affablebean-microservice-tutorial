@@ -1,4 +1,4 @@
-package tvo.tutorial.microservice.affablebean.category;
+package tvo.tutorial.microservice.ws.category;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package tvo.tutorial.microservice.affablebean.item;
+package tvo.tutorial.microservice.ws.item;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

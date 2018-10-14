@@ -1,4 +1,4 @@
-package tvo.tutorial.microservice.affablebean;
+package tvo.tutorial.microservice.ws;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
