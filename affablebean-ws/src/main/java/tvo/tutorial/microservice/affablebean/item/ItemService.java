@@ -2,6 +2,7 @@ package tvo.tutorial.microservice.affablebean.item;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -18,8 +19,16 @@ public class ItemService {
         return itemRepository.findByCategoryId(categoryId);
     }
 
-    public String upsert(Item item) {
+    public Item upsert(Item item, String categoryId) {
+        if (StringUtils.isEmpty(item.getId())) {
+            item.setId(null);
+        }
+        item.setCategoryId(categoryId);
         itemRepository.save(item);
-        return item.getId();
+        return item;
+    }
+
+    public void delete(Item item) {
+        itemRepository.delete(item);
     }
 }

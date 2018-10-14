@@ -31,7 +31,7 @@ public class CategoryController {
     public List<Category> bulkUpsert(@RequestBody List<Category> categories) {
         Set<String> result = new HashSet<>();
         categories.forEach(category -> result.add(categoryService.upsert(category).getId()));
-        return result.size() > 0 ? categoryService.fetch() : Collections.emptyList();
+        return result.isEmpty() ? Collections.emptyList() : categoryService.fetch();
     }
 
     @PostMapping("/bulkDelete")
