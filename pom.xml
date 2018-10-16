@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>affablebean-admin</module>
         <module>affablebean-proxy</module>
         <module>affablebean-ui</module>
         <module>affablebean-ws</module>
