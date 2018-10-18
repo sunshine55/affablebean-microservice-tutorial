@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>affablebean-proxy</name>
-	<description>AffableBean proxy Spring Cloud microservice tutorial</description>
+	<description>AffableBean proxy and oauth server Spring Cloud microservice tutorial</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -41,6 +41,14 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security.oauth.boot</groupId>
+			<artifactId>spring-security-oauth2-autoconfigure</artifactId>
 		</dependency>
 	</dependencies>
 </project>
