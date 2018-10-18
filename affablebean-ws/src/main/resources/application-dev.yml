@@ -1,0 +1,6 @@
+server:
+  port: 2601
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/affablebean
