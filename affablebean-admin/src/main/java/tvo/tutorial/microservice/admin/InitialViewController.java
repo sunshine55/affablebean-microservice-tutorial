@@ -17,11 +17,8 @@ public class InitialViewController {
 
     @GetMapping("/{page}")
     public String getPage(@PathVariable("page") String page, ModelMap map, Authentication auth) {
-        if (auth != null && auth.isAuthenticated()) {
-            String currentPage = StringUtils.isEmpty(page) ? "category" : page;
-            map.addAttribute("currentPage", currentPage);
-            return "dashboard.html";
-        }
-        return "login.html";
+        String currentPage = StringUtils.isEmpty(page) ? "category" : page;
+        map.addAttribute("currentPage", currentPage);
+        return "dashboard.html";
     }
 }
