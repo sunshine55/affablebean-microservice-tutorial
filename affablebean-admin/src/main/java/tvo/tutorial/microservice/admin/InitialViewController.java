@@ -1,6 +1,5 @@
 package tvo.tutorial.microservice.admin;
 
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +15,7 @@ public class InitialViewController {
     }
 
     @GetMapping("/{page}")
-    public String getPage(@PathVariable("page") String page, ModelMap map, Authentication auth) {
+    public String getPage(@PathVariable("page") String page, ModelMap map) {
         String currentPage = StringUtils.isEmpty(page) ? "category" : page;
         map.addAttribute("currentPage", currentPage);
         return "dashboard.html";

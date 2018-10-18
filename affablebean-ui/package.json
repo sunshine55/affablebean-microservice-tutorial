@@ -1,7 +1,7 @@
 {
   "name": "affablebean-ui",
   "version": "0.0.1",
-  "description": "AffableBean frontend Spring Boot microservice tutorial",
+  "description": "AffableBean front store client Spring Boot microservice tutorial",
   "main": "webpack.config.js",
   "scripts": {
     "dev": "webpack --watch --debug --output-pathinfo --devtool eval --env.NODE_ENV=dev",
