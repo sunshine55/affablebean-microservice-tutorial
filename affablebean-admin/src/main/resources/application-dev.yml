@@ -10,5 +10,5 @@ security:
     client:
       client-id: SampleClientId
       client-secret: secret
-      access-token-uri: http://localhost:2600/auth/oauth/token
-      user-authorization-uri: http://localhost:2600/auth/oauth/authorize
+      access-token-uri: http://localhost:2600/oauth/token
+      user-authorization-uri: http://localhost:2600/oauth/authorize
