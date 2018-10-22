@@ -5,10 +5,3 @@ spring:
     cache: false
   resources:
     static-locations: file:src/main/resources/static
-security:
-  oauth2:
-    client:
-      client-id: SampleClientId
-      client-secret: secret
-      access-token-uri: http://proxy_container:2600/auth/oauth/token
-      user-authorization-uri: http://proxy_container:2600/auth/oauth/authorize
