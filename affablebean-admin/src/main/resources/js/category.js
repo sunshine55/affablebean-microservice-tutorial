@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {render} from 'react-dom';
 import * as api from '../lib/api';
 import ReactTable from 'react-table';
 import checkboxHOC from 'react-table/lib/hoc/selectTable';
@@ -43,6 +42,10 @@ class CategoryView extends Component {
         this.handleCreate = this.handleCreate.bind(this);
         this.handleSave = this.handleSave.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+    }
+
+    componentDidMount() {
+        this.handleReset();
     }
 
     renderEditable(cellInfo) {
@@ -146,4 +149,4 @@ class CategoryView extends Component {
     }
 }
 
-$.get(api.CATEGORY_API_FETCH, (data) => render(<CategoryView data={getData(data)}/>, document.getElementById('wrap')));
+export default CategoryView;

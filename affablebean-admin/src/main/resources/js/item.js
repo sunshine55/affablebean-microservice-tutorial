@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {render} from 'react-dom';
 import * as api from '../lib/api';
 import ReactTable from 'react-table';
 import checkboxHOC from 'react-table/lib/hoc/selectTable';
@@ -172,4 +171,4 @@ class ItemView extends Component {
     }
 }
 
-$.get(api.CATEGORY_API_FETCH, (categories) => render(<ItemView categories={categories}/>, document.getElementById('wrap')));
+export default ItemView;
