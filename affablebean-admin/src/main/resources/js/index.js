@@ -1,38 +1,77 @@
 import React, {Component} from 'react';
+import {render} from 'react-dom';
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 
-const NavBar = () => (
-    <nav className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-        <a className="navbar-brand col-md-2 mr-0">AffableBean Admin</a>
-        <input className="form-control form-control-dark w-100" type="text" placeholder="Search"/>
-        <ul className="navbar-nav px-3">
-            <li className="nav-item text-nowrap">
-                <a className="nav-link" href="#">Sign out</a>
-            </li>
-        </ul>
-    </nav>
-);
+const fakeAuth = {
+    isAuthenticated: false,
+    authenticate(cb) {
+        this.isAuthenticated = true;
+        setTimeout(cb, 1000);
+    },
+    logout(cb) {
+        this.isAuthenticated = false;
+        setTimeout(cb, 1000);
+    }
+};
 
-const SideBar = () => (
-    <nav className="col-md-2 d-none d-md-block bg-light sidebar">
-        <div className="sidebar-sticky">
-            <ul className="nav flex-column">
-                <li className="nav-item">
-                    <a className="nav-link"><i className="fas fa-th-large"/> Category Management</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link"><i className="fas fa-list"/> Item Management</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-);
-
-class AppView extends Component {
+class Login extends Component {
     constructor(props) {
         super(props);
+        this.state = {isLogged: fakeAuth.isAuthenticated};
+        this.login = this.login.bind(this);
+    }
+
+    login() {
+        const _this = this;
+        fakeAuth.authenticate(() => _this.setState({isLogged: true}));
     }
 
     render() {
-        return null;
+        if (this.state.isLogged) {
+            return (<Redirect to="/dashboard"/>);
+        }
+        return (
+            <div>
+                <p>Please login.</p>
+                <input type="button" value="Login" onClick={this.login}/>
+            </div>
+        );
     }
 }
+
+class Dashboard extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {isLogged: fakeAuth.isAuthenticated};
+        this.logout = this.logout.bind(this);
+    }
+
+    logout() {
+        const _this = this;
+        fakeAuth.logout(() => _this.setState({isLogged: false}));
+    }
+
+    render() {
+        if (this.state.isLogged) {
+            return (
+                <div>
+                    <p>Welcome to Dashboard view.</p>
+                    <input type="button" value="Logout" onClick={this.logout}/>
+                </div>
+            );
+        }
+        return (<Redirect to="/"/>);
+    }
+}
+
+
+const App = () => (
+    <BrowserRouter>
+        <Switch>
+            <Route exact path="/" component={Login}/>
+            <Route path="/dashboard" component={Dashboard}/>
+        </Switch>
+    </BrowserRouter>
+);
+
+render(<App/>, document.getElementById('root'));
