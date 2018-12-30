@@ -1,13 +1,12 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 
-const NavBar = () => (
+const NavBar = ({logout}) => (
     <nav className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-        <span className="navbar-brand col-md-2 mr-0"><Link to="/admin">AffableBean Admin</Link></span>
+        <span className="navbar-brand col-md-2 mr-0"/>
         <input className="form-control form-control-dark w-100" type="text" placeholder="Search"/>
         <ul className="navbar-nav px-3">
-            <li className="nav-item text-nowrap">
-                <span className="nav-link"><Link to="/admin/logout">Sign out</Link></span>
+            <li className="nav-item text-nowrap" onClick={logout}>
+                <a className="nav-link">Sign Out</a>
             </li>
         </ul>
     </nav>
@@ -18,23 +17,19 @@ const SideBar = () => (
         <div className="sidebar-sticky">
             <ul className="nav flex-column">
                 <li className="nav-item">
-                    <span className="nav-link">
-                        <i className="fas fa-th-large"/><Link to="/admin/category"> Category Management</Link>
-                    </span>
+                    <a className="nav-link"><i className="fas fa-th-large"/> Category Management</a>
                 </li>
                 <li className="nav-item">
-                    <span className="nav-link">
-                        <i className="fas fa-list"/><Link to="/admin/item"> Item Management</Link>
-                    </span>
+                    <a className="nav-link"><i className="fas fa-list"/> Item Management</a>
                 </li>
             </ul>
         </div>
     </nav>
 );
 
-const DashboardView = () => (
+const DashboardView = ({logout}) => (
     <div>
-        <NavBar/>
+        <NavBar logout={logout}/>
         <div className="container-fluid">
             <div className="row">
                 <SideBar/>
