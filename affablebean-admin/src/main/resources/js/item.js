@@ -6,6 +6,9 @@ import checkboxHOC from 'react-table/lib/hoc/selectTable';
 const CheckboxTable = checkboxHOC(ReactTable);
 
 const CategorySelectBox = ({categories, selectedCategory, onChange}) => {
+    if (!categories) {
+        return null;
+    }
     const options = categories.map(datum => (<option key={datum.id} value={datum.id}>{datum.name}</option>));
     return (<select className="form-control" onChange={onChange} value={selectedCategory}>{options}</select>);
 };
@@ -44,7 +47,8 @@ class ItemView extends Component {
                 Cell: this.renderEditable
             }],
             data: [],
-            selectedCategory: this.props.categories[0].id,
+            categories: null,
+            selectedCategory: null,
             selection: [],
             selectAll: false
         };
@@ -56,7 +60,14 @@ class ItemView extends Component {
     }
 
     componentDidMount() {
-        this.handleReset();
+        const _this = this;
+        $.get(api.CATEGORY_API_FETCH, (categories) => {
+            $.get(`${api.ITEM_API_FETCH}/${categories[0].id}`, (data) => _this.setState({
+                categories: categories,
+                selectedCategory: categories[0].id,
+                data: getData(data)
+            }));
+        });
     }
 
     renderEditable(cellInfo) {
@@ -139,7 +150,7 @@ class ItemView extends Component {
         const {data, columns, selectAll} = this.state;
 
         const checkboxProps = {selectAll, isSelected, toggleSelection, toggleAll, selectType: 'checkbox'};
-        const categoryProps = {categories: this.props.categories, selectedCategory: this.state.selectedCategory, onChange: this.handleCategoryChange};
+        const categoryProps = {categories: this.state.categories, selectedCategory: this.state.selectedCategory, onChange: this.handleCategoryChange};
 
         return (
             <div>

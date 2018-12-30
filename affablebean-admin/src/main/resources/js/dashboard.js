@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {Component} from 'react';
+import CategoryView from './category';
+import ItemView from './item';
 
 const NavBar = ({logout}) => (
     <nav className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
@@ -12,31 +14,52 @@ const NavBar = ({logout}) => (
     </nav>
 );
 
-const SideBar = () => (
+const SideBar = ({select}) => (
     <nav className="col-md-2 d-none d-md-block bg-light sidebar">
         <div className="sidebar-sticky">
             <ul className="nav flex-column">
                 <li className="nav-item">
-                    <a className="nav-link"><i className="fas fa-th-large"/> Category Management</a>
+                    <a name="category" className="nav-link" onClick={select}><i className="fas fa-th-large"/> Category Management</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link"><i className="fas fa-list"/> Item Management</a>
+                    <a name="item" className="nav-link" onClick={select}><i className="fas fa-list"/> Item Management</a>
                 </li>
             </ul>
         </div>
     </nav>
 );
 
-const DashboardView = ({logout}) => (
-    <div>
-        <NavBar logout={logout}/>
-        <div className="container-fluid">
-            <div className="row">
-                <SideBar/>
-                <main role="main" className="col-md-9 col-lg-10 ml-sm-auto pt-3 px-4"/>
-            </div>
-        </div>
-    </div>
-);
+export default class DashboardView extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {selected: <CategoryView/>};
+        this.onSelect = this.onSelect.bind(this);
+    }
 
-export default DashboardView;
+    onSelect(e) {
+        switch (e.target.name) {
+            case 'category':
+                this.setState({selected: <CategoryView/>});
+                break;
+            case 'item':
+                this.setState({selected: <ItemView/>});
+                break;
+            default:
+                this.setState({selected: null})
+        }
+    }
+
+    render() {
+        return (
+            <div>
+                <NavBar logout={this.props.logout}/>
+                <div className="container-fluid">
+                    <div className="row">
+                        <SideBar select={this.onSelect}/>
+                        <main role="main" className="col-md-9 col-lg-10 ml-sm-auto pt-3 px-4">{this.state.selected}</main>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+}
