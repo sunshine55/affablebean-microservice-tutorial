@@ -18,3 +18,15 @@ export const post = (url, data, callback) => {
         (e) => alert(`HTTP ${e.status}: ${e.responseJSON.error}!`)
     );
 };
+
+export const fakeAuth = {
+    isAuthenticated: false,
+    authenticate(cb) {
+        this.isAuthenticated = true;
+        setTimeout(cb, 1000);
+    },
+    logout(cb) {
+        this.isAuthenticated = false;
+        setTimeout(cb, 1000);
+    }
+};
