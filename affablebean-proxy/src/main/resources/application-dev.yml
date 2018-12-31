@@ -8,3 +8,4 @@ zuul:
       url: http://localhost:2602
     admin:
       url: http://localhost:2603
+  sensitive-headers:

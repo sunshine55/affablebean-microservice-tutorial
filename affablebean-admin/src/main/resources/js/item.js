@@ -61,8 +61,8 @@ class ItemView extends Component {
 
     componentDidMount() {
         const _this = this;
-        $.get(api.CATEGORY_API_FETCH, (categories) => {
-            $.get(`${api.ITEM_API_FETCH}/${categories[0].id}`, (data) => _this.setState({
+        api.get(api.CATEGORY_API_FETCH, (categories) => {
+            api.get(`${api.ITEM_API_FETCH}/${categories[0].id}`, (data) => _this.setState({
                 categories: categories,
                 selectedCategory: categories[0].id,
                 data: getData(data)
@@ -115,11 +115,11 @@ class ItemView extends Component {
 
     handleCategoryChange(e) {
         const selectedCategory = e.target.value;
-        $.get(`${api.ITEM_API_FETCH}/${selectedCategory}`, (data) => this.setState({data: getData(data), selectedCategory: selectedCategory}));
+        api.get(`${api.ITEM_API_FETCH}/${selectedCategory}`, (data) => this.setState({data: getData(data), selectedCategory: selectedCategory}));
     }
 
     handleReset() {
-        $.get(`${api.ITEM_API_FETCH}/${this.state.selectedCategory}`, (data) => this.setState({data: getData(data)}));
+        api.get(`${api.ITEM_API_FETCH}/${this.state.selectedCategory}`, (data) => this.setState({data: getData(data)}));
     }
 
     handleCreate() {

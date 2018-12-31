@@ -92,7 +92,7 @@ class CategoryView extends Component {
     }
 
     handleReset() {
-        $.get(api.CATEGORY_API_FETCH, (data) => this.setState({data: getData(data)}));
+        api.get(api.CATEGORY_API_FETCH, (data) => this.setState({data: getData(data)}));
     }
 
     handleCreate() {

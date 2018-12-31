@@ -12,9 +12,9 @@ class Login extends Component {
         this.login = this.login.bind(this);
     }
 
-    login() {
+    login(credentials) {
         const _this = this;
-        fakeAuth.authenticate(() => _this.setState({isLogged: true}));
+        fakeAuth.login(credentials, () => _this.setState({isLogged: true}));
     }
 
     render() {
