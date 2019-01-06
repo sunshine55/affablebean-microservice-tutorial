@@ -2,6 +2,7 @@ package tvo.tutorial.microservice.proxy;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -26,6 +27,7 @@ public class JwtTokenAuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse rsp, FilterChain filterChain) throws ServletException, IOException {
         String token = req.getHeader("Authorization");
         if (token != null && token.startsWith("Bearer ")) {
+            token = token.replace("Bearer ", StringUtils.EMPTY);
             try {
                 Claims claims = Jwts.parser()
                     .setSigningKey(jwtSecret.getBytes())
