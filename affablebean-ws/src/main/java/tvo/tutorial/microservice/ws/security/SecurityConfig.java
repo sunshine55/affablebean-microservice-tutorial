@@ -1,4 +1,4 @@
-package tvo.tutorial.microservice.proxy;
+package tvo.tutorial.microservice.ws.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -29,7 +29,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .exceptionHandling().authenticationEntryPoint((req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED)).and()
             .addFilterAfter(filter, UsernamePasswordAuthenticationFilter.class)
             .authorizeRequests()
-            .antMatchers("/admin/**").permitAll()
             .antMatchers("/ui/**").permitAll()
             .anyRequest().authenticated();
     }
