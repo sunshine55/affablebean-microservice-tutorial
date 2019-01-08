@@ -1,10 +1,10 @@
-export const CATEGORY_API_FETCH = '/ws/category/fetch';
-export const CATEGORY_API_BULK_UPSERT = '/ws/category/bulkUpsert';
-export const CATEGORY_API_BULK_DELETE = '/ws/category/bulkDelete';
+export const CATEGORY_API_FETCH = '/ws/ui/category/fetch';
+export const CATEGORY_API_BULK_UPSERT = '/ws/admin/category/bulkUpsert';
+export const CATEGORY_API_BULK_DELETE = '/ws/admin/category/bulkDelete';
 
-export const ITEM_API_FETCH = '/ws/item/fetch';
-export const ITEM_API_BULK_UPSERT = '/ws/item/bulkUpsert';
-export const ITEM_API_BULK_DELETE = '/ws/item/bulkDelete';
+export const ITEM_API_FETCH = '/ws/ui/item/fetch';
+export const ITEM_API_BULK_UPSERT = '/ws/admin/item/bulkUpsert';
+export const ITEM_API_BULK_DELETE = '/ws/admin/item/bulkDelete';
 
 const JWT = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4uZG9lMTIzNCIsInBhc3N3b3JkIjoiNmg1SG5qMlZIRSJ9.pyTm3UxoV8DeLIywJzU3SCPn5jBmCkAUu45G888lN9Q';
 

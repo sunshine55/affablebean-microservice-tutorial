@@ -1,7 +1,6 @@
 package tvo.tutorial.microservice.ws.item;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,18 +13,13 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/item")
-public class ItemController {
+@RequestMapping("/admin/item")
+public class ItemAdminController {
     private ItemService itemService;
 
     @Autowired
     public void setItemService(ItemService itemService) {
         this.itemService = itemService;
-    }
-
-    @GetMapping("/fetch/{categoryId}")
-    public List<Item> fetch(@PathVariable String categoryId) {
-        return itemService.fetch(categoryId);
     }
 
     @PostMapping("/bulkUpsert/{categoryId}")

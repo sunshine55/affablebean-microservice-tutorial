@@ -46,6 +46,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .addFilterAfter(getFilter(), UsernamePasswordAuthenticationFilter.class)
             .authorizeRequests()
             .antMatchers("/").permitAll()
+            .antMatchers("/bundle/**").permitAll()
+            .antMatchers("/css/**").permitAll()
             .anyRequest().authenticated();
     }
 }
