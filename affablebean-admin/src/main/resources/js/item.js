@@ -61,8 +61,8 @@ class ItemView extends Component {
 
     componentDidMount() {
         const _this = this;
-        api.get(api.CATEGORY_API_FETCH, (categories) => {
-            api.get(`${api.ITEM_API_FETCH}/${categories[0].id}`, (data) => _this.setState({
+        api.get(api.CATEGORY_FETCH_URI, (categories) => {
+            api.get(`${api.ITEM_FETCH_URI}/${categories[0].id}`, (data) => _this.setState({
                 categories: categories,
                 selectedCategory: categories[0].id,
                 data: getData(data)
@@ -115,11 +115,11 @@ class ItemView extends Component {
 
     handleCategoryChange(e) {
         const selectedCategory = e.target.value;
-        api.get(`${api.ITEM_API_FETCH}/${selectedCategory}`, (data) => this.setState({data: getData(data), selectedCategory: selectedCategory}));
+        api.get(`${api.ITEM_FETCH_URI}/${selectedCategory}`, (data) => this.setState({data: getData(data), selectedCategory: selectedCategory}));
     }
 
     handleReset() {
-        api.get(`${api.ITEM_API_FETCH}/${this.state.selectedCategory}`, (data) => this.setState({data: getData(data)}));
+        api.get(`${api.ITEM_FETCH_URI}/${this.state.selectedCategory}`, (data) => this.setState({data: getData(data)}));
     }
 
     handleCreate() {
@@ -131,7 +131,7 @@ class ItemView extends Component {
     }
 
     handleSave() {
-        api.post(`${api.ITEM_API_BULK_UPSERT}/${this.state.selectedCategory}`, this.state.data, (data) => this.setState({data: getData(data)}));
+        api.post(`${api.ITEM_BULK_UPSERT_URI}/${this.state.selectedCategory}`, this.state.data, (data) => this.setState({data: getData(data)}));
     }
 
     handleDelete() {
@@ -141,7 +141,7 @@ class ItemView extends Component {
                 const deletedRow = this.state.data.filter(datum => datum._id === _id)[0];
                 deletedRows.push(deletedRow);
             });
-            api.post(`${api.ITEM_API_BULK_DELETE}/${this.state.selectedCategory}`, deletedRows, (data) => this.setState({data: getData(data)}));
+            api.post(`${api.ITEM_BULK_DELETE_URI}/${this.state.selectedCategory}`, deletedRows, (data) => this.setState({data: getData(data)}));
         }
     }
 

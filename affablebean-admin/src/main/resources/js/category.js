@@ -92,7 +92,7 @@ class CategoryView extends Component {
     }
 
     handleReset() {
-        api.get(api.CATEGORY_API_FETCH, (data) => this.setState({data: getData(data)}));
+        api.get(api.CATEGORY_FETCH_URI, (data) => this.setState({data: getData(data)}));
     }
 
     handleCreate() {
@@ -104,7 +104,7 @@ class CategoryView extends Component {
     }
 
     handleSave() {
-        api.post(api.CATEGORY_API_BULK_UPSERT, this.state.data, (data) => this.setState({data: getData(data)}));
+        api.post(api.CATEGORY_BULK_UPSERT_URI, this.state.data, (data) => this.setState({data: getData(data)}));
     }
 
     handleDelete() {
@@ -114,7 +114,7 @@ class CategoryView extends Component {
                 const deletedRow = this.state.data.filter(datum => datum._id === _id)[0];
                 deletedRows.push(deletedRow);
             });
-            api.post(api.CATEGORY_API_BULK_DELETE, deletedRows, (data) => this.setState({data: getData(data)}));
+            api.post(api.CATEGORY_BULK_DELETE_URI, deletedRows, (data) => this.setState({data: getData(data)}));
         }
     }
 
