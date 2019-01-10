@@ -66,4 +66,6 @@ Using proxy localhost (ref.: affablebean-proxy's application.properties):
 * Admin Interface: access via port 2000 `/admin` context; i.e.: http://localhost:2600/admin
 * RESTful api: access via port 2600, `/ws` context; i.e.: http://localhost:2600/ws/category/fetch
 
-Set environment variable `spring.profiles.active=dev` for development (Running with IDE or CLI) 
+Set environment variables for development (Running with IDE or CLI):
+* `spring.profiles.active` = `dev`
+* `jwt.secret` = <256-bit-secret>

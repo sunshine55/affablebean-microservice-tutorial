@@ -30,6 +30,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .addFilterAfter(filter, UsernamePasswordAuthenticationFilter.class)
             .authorizeRequests()
             .antMatchers("/ui/**").permitAll()
-            .anyRequest().authenticated();
+            .antMatchers("/admin/**").hasRole("ADMIN");
     }
 }
