@@ -14,7 +14,7 @@ const initAuth = () => {
 
     const login = (credentials, cb) => {
         $.ajax({
-            url: url,
+            url: '/admin',
             data: JSON.stringify(credentials),
             type: 'POST',
             contentType: 'application/json; charset=utf-8'
@@ -64,7 +64,7 @@ class Login extends Component {
 class Dashboard extends Component {
     constructor(props) {
         super(props);
-        this.state = {isAuthenticated: window.AUTH.isAuthenticated};
+        this.state = {isAuthenticated: window.AUTH.getAuth()};
         this.logout = this.logout.bind(this);
     }
 
