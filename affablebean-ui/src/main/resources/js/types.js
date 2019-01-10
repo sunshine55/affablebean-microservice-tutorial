@@ -10,5 +10,5 @@ export const ADD_CART = 'ADD_CART';
 export const CLEAR_CART = 'CLEAR_CART';
 export const UPDATE_QUANTITY = 'UPDATE_QUANTITY';
 
-export const FETCH_CATEGORY_URL = '/ws/category/fetch';
-export const FETCH_ITEM_URL = '/ws/item/fetch';
+export const FETCH_CATEGORY_URL = '/ws/ui/category/fetch';
+export const FETCH_ITEM_URL = '/ws/ui/item/fetch';

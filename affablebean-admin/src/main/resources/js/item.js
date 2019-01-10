@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {render} from 'react-dom';
 import * as api from '../lib/api';
 import ReactTable from 'react-table';
 import checkboxHOC from 'react-table/lib/hoc/selectTable';
@@ -7,6 +6,9 @@ import checkboxHOC from 'react-table/lib/hoc/selectTable';
 const CheckboxTable = checkboxHOC(ReactTable);
 
 const CategorySelectBox = ({categories, selectedCategory, onChange}) => {
+    if (!categories) {
+        return null;
+    }
     const options = categories.map(datum => (<option key={datum.id} value={datum.id}>{datum.name}</option>));
     return (<select className="form-control" onChange={onChange} value={selectedCategory}>{options}</select>);
 };
@@ -45,7 +47,8 @@ class ItemView extends Component {
                 Cell: this.renderEditable
             }],
             data: [],
-            selectedCategory: this.props.categories[0].id,
+            categories: null,
+            selectedCategory: null,
             selection: [],
             selectAll: false
         };
@@ -57,7 +60,14 @@ class ItemView extends Component {
     }
 
     componentDidMount() {
-        this.handleReset();
+        const _this = this;
+        api.get(api.CATEGORY_FETCH_URI, (categories) => {
+            api.get(`${api.ITEM_FETCH_URI}/${categories[0].id}`, (data) => _this.setState({
+                categories: categories,
+                selectedCategory: categories[0].id,
+                data: getData(data)
+            }));
+        });
     }
 
     renderEditable(cellInfo) {
@@ -105,11 +115,11 @@ class ItemView extends Component {
 
     handleCategoryChange(e) {
         const selectedCategory = e.target.value;
-        $.get(`${api.ITEM_API_FETCH}/${selectedCategory}`, (data) => this.setState({data: getData(data), selectedCategory: selectedCategory}));
+        api.get(`${api.ITEM_FETCH_URI}/${selectedCategory}`, (data) => this.setState({data: getData(data), selectedCategory: selectedCategory}));
     }
 
     handleReset() {
-        $.get(`${api.ITEM_API_FETCH}/${this.state.selectedCategory}`, (data) => this.setState({data: getData(data)}));
+        api.get(`${api.ITEM_FETCH_URI}/${this.state.selectedCategory}`, (data) => this.setState({data: getData(data)}));
     }
 
     handleCreate() {
@@ -121,7 +131,7 @@ class ItemView extends Component {
     }
 
     handleSave() {
-        api.post(`${api.ITEM_API_BULK_UPSERT}/${this.state.selectedCategory}`, this.state.data, (data) => this.setState({data: getData(data)}));
+        api.post(`${api.ITEM_BULK_UPSERT_URI}/${this.state.selectedCategory}`, this.state.data, (data) => this.setState({data: getData(data)}));
     }
 
     handleDelete() {
@@ -131,7 +141,7 @@ class ItemView extends Component {
                 const deletedRow = this.state.data.filter(datum => datum._id === _id)[0];
                 deletedRows.push(deletedRow);
             });
-            api.post(`${api.ITEM_API_BULK_DELETE}/${this.state.selectedCategory}`, deletedRows, (data) => this.setState({data: getData(data)}));
+            api.post(`${api.ITEM_BULK_DELETE_URI}/${this.state.selectedCategory}`, deletedRows, (data) => this.setState({data: getData(data)}));
         }
     }
 
@@ -140,7 +150,7 @@ class ItemView extends Component {
         const {data, columns, selectAll} = this.state;
 
         const checkboxProps = {selectAll, isSelected, toggleSelection, toggleAll, selectType: 'checkbox'};
-        const categoryProps = {categories: this.props.categories, selectedCategory: this.state.selectedCategory, onChange: this.handleCategoryChange};
+        const categoryProps = {categories: this.state.categories, selectedCategory: this.state.selectedCategory, onChange: this.handleCategoryChange};
 
         return (
             <div>
@@ -172,4 +182,4 @@ class ItemView extends Component {
     }
 }
 
-$.get(api.CATEGORY_API_FETCH, (categories) => render(<ItemView categories={categories}/>, document.getElementById('wrap')));
+export default ItemView;
