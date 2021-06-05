@@ -2,60 +2,34 @@
 
 Demonstrate microservice system with docker and docker-compose
 
-Prerequisites: docker, docker-compose, maven, node and npm were installed
+Prerequisites: docker, maven
 
 ## Docker
-
-If using docker-compose then skip these steps and refer to __Docker Compose__ section
 
 #### Compile
 ```
 git clone https://github.com/sunshine55/affablebean-microservice-tutorial.git
-cd affablebean-microservice-tutorial/affablebean-ui
-npm run prod
-cd ../affablebean-admin
-npm run prod
-cd ..
+cd affablebean-microservice-tutorial/shop
 mvn clean package
 ```
 
 #### Build
 
-Build to run locally
+Build to run locally (given current folder is working root `affablebean-microservice-tutorial`)
 ```
-docker build -t affablebean-proxy:latest affablebean-proxy
-docker build -t affablebean-ws:latest affablebean-ws
-docker build -t affablebean-ui:latest affablebean-ui
-docker build -t affablebean-admin:latest affablebean-admin
-```
-
-Build to push to docker hub
-```
-docker build -t <DOCKER_HUB_ID>/affablebean-proxy affablebean-proxy
-docker build -t <DOCKER_HUB_ID>/affablebean-ws affablebean-ws
-docker build -t <DOCKER_HUB_ID>/affablebean-ui affablebean-ui
-docker build -t <DOCKER_HUB_ID>/affablebean-admin affalbebean-admin
+docker build -t afbb/shop shop
 ```
 
 #### Run
 
-Verify images: `docker images` (supposed images are built to run locally)
+Verify images: `docker images` (given images are built to run locally)
 
 Run containers from the images at localhost:
 ```
-docker network create ms_tutorial
-docker run --name mongo_container -p 27017:27017 --network ms_tutorial -d mongo:4.0.1
-docker run --name proxy_container -p 2600:2600 --network ms_tutorial -d affablebean-proxy:latest
-docker run --name ws_container -p 2602:2601 --network ms_tutorial -d affablebean-ws:latest
-docker run --name ui_container -p 2601:2602 --network ms_tutorial -d affablebean-ui:latest
-docker run --name admin_container -p 2601:2603 --network ms_tutorial -d affablebean-admin:latest
+docker network create afbb_ms_tut
+docker run --name afbb-mongodb -p 27017:27017 --network afbb_ms_tut -d mongo:latest
+docker run --name afbb-shop -p 2600:2600 --network afbb_ms_tut -d afbb/shop:latest
 ```
-
-## Docker Compose
-
-Create network: `docker network create ms_tutorial`
-
-Start up Docker Compose: `docker-compose up -d`
 
 ## Usage
 
