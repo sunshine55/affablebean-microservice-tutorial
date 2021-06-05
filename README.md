@@ -2,7 +2,7 @@
 
 Demonstrate microservice system with docker and docker-compose
 
-Prerequisites: docker, maven
+Prerequisites: docker, maven, openjdk-11
 
 ## Docker
 
@@ -32,14 +32,3 @@ docker run --name afbb-shop -p 2600:2600 --network afbb_ms_tut -d afbb/shop:late
 ```
 
 ## Usage
-
-The instance is running on port 2601 (ui service) and port 2602 (RESTful api) but access via proxy instance port 2600
-
-Using proxy localhost (ref.: affablebean-proxy's application.properties):
-* User Interface: access via port 2600, `/ui` context; i.e.: http://localhost:2600/ui
-* Admin Interface: access via port 2000 `/admin` context; i.e.: http://localhost:2600/admin
-* RESTful api: access via port 2600, `/ws` context; i.e.: http://localhost:2600/ws/category/fetch
-
-Set environment variables for development (Running with IDE or CLI):
-* `spring.profiles.active` = `dev`
-* `jwt.secret` = <256-bit-secret>
