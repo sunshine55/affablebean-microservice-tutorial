@@ -1,4 +1,7 @@
 target/
+debug/*
+!debug/README.md
+
 
 ### STS ###
 .apt_generated

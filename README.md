@@ -15,7 +15,7 @@ mvn clean package
 
 #### Build
 
-Build to run locally (given current folder is working root `affablebean-microservice-tutorial`)
+Build to run locally (given working folder is project root `affablebean-microservice-tutorial`)
 ```
 docker build -t afbb/shop shop
 ```
@@ -32,3 +32,10 @@ docker run --name afbb-shop -p 2600:2600 --network afbb_ms_tut -d afbb/shop:late
 ```
 
 ## Usage
+
+Populate data (given working folder is project root `affablebean-microservice-tutorial`):
+```
+docker start afbb-mongodb
+docker cp ./shop/src/test/resources/items.json afbb-mongodb:/tmp/items.json
+docker exec afbb-mongodb mongoimport -d affablebean -c item --type json --file /tmp/items.json --jsonArray
+```
