@@ -2,7 +2,7 @@
 
 Demonstrate microservice system with docker and docker-compose
 
-Prerequisites: docker, maven
+Prerequisites: docker, maven, openjdk-11
 
 ## Docker
 
@@ -15,7 +15,7 @@ mvn clean package
 
 #### Build
 
-Build to run locally (given current folder is working root `affablebean-microservice-tutorial`)
+Build to run locally (given working folder is project root `affablebean-microservice-tutorial`)
 ```
 docker build -t afbb/shop shop
 ```
@@ -33,13 +33,9 @@ docker run --name afbb-shop -p 2600:2600 --network afbb_ms_tut -d afbb/shop:late
 
 ## Usage
 
-The instance is running on port 2601 (ui service) and port 2602 (RESTful api) but access via proxy instance port 2600
-
-Using proxy localhost (ref.: affablebean-proxy's application.properties):
-* User Interface: access via port 2600, `/ui` context; i.e.: http://localhost:2600/ui
-* Admin Interface: access via port 2000 `/admin` context; i.e.: http://localhost:2600/admin
-* RESTful api: access via port 2600, `/ws` context; i.e.: http://localhost:2600/ws/category/fetch
-
-Set environment variables for development (Running with IDE or CLI):
-* `spring.profiles.active` = `dev`
-* `jwt.secret` = <256-bit-secret>
+Populate data (given working folder is project root `affablebean-microservice-tutorial`):
+```
+docker start afbb-mongodb
+docker cp ./shop/src/test/resources/items.json afbb-mongodb:/tmp/items.json
+docker exec afbb-mongodb mongoimport -d affablebean -c item --type json --file /tmp/items.json --jsonArray
+```
