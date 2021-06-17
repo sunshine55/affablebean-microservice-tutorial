@@ -6,32 +6,38 @@ Prerequisites: docker, maven, openjdk-11
 
 ## Docker
 
-#### Compile
+### Compile
 ```
 git clone https://github.com/sunshine55/affablebean-microservice-tutorial.git
 cd affablebean-microservice-tutorial/shop
 mvn clean package
 ```
 
-#### Build
+**Note**: run project without building docker image (given mongodb image was downloaded)
+```
+docker start afbb-mongodb
+mvn spring-boot:run
+```
+
+### Build
 
 Build to run locally (given working folder is project root `affablebean-microservice-tutorial`)
 ```
-docker build -t afbb/shop shop
+docker image build -t afbb/shop shop
 ```
 
-#### Run
+### Run
 
-Verify images: `docker images` (given images are built to run locally)
+Verify images: `docker image ls` (given images are built to run locally)
 
 Run containers from the images at localhost:
 ```
 docker network create afbb_ms_tut
-docker run --name afbb-mongodb -p 27017:27017 --network afbb_ms_tut -d mongo:latest
-docker run --name afbb-shop -p 2600:2600 --network afbb_ms_tut -d afbb/shop:latest
+docker run --name afbb-mongodb -p 27017:27017 --network afbb_ms_tut -d mongo
+docker run --name afbb-shop -p 2600:2600 --network afbb_ms_tut -e SPRING_PROFILE=docker -d afbb/shop
 ```
 
-## Usage
+### Data Seeding
 
 Populate data (given working folder is project root `affablebean-microservice-tutorial`):
 ```
@@ -39,3 +45,5 @@ docker start afbb-mongodb
 docker cp ./shop/src/test/resources/items.json afbb-mongodb:/tmp/items.json
 docker exec afbb-mongodb mongoimport -d affablebean -c item --type json --file /tmp/items.json --jsonArray
 ```
+
+## Usage
