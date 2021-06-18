@@ -1,10 +1,12 @@
 # Tutorial
 
-Demonstrate microservice system with docker and docker-compose
+Demonstrate microservice system with Docker and Kubernetes
 
-Prerequisites: docker, maven, openjdk-11
+**Prerequisites**: docker, maven, openjdk-11, minikube, kubectl
 
 ## Docker
+
+Given working folder is project root `affablebean-microservice-tutorial`
 
 ### Compile
 ```
@@ -21,7 +23,6 @@ mvn spring-boot:run
 
 ### Build
 
-Build to run locally (given working folder is project root `affablebean-microservice-tutorial`)
 ```
 docker image build -t afbb/shop shop
 ```
@@ -33,17 +34,41 @@ Verify images: `docker image ls` (given images are built to run locally)
 Run containers from the images at localhost:
 ```
 docker network create afbb_ms_tut
-docker run --name afbb-mongodb -p 27017:27017 --network afbb_ms_tut -d mongo
+docker run --name afbb-mongodb -p 27017:27017 --network afbb_ms_tut -d mongo:4.4.6
 docker run --name afbb-shop -p 2600:2600 --network afbb_ms_tut -e SPRING_PROFILE=docker -d afbb/shop
 ```
 
 ### Data Seeding
 
-Populate data (given working folder is project root `affablebean-microservice-tutorial`):
 ```
 docker start afbb-mongodb
 docker cp ./shop/src/test/resources/items.json afbb-mongodb:/tmp/items.json
 docker exec afbb-mongodb mongoimport -d affablebean -c item --type json --file /tmp/items.json --jsonArray
 ```
 
-## Usage
+## Kubernetes
+
+Given working folder is project root `affablebean-microservice-tutorial`
+
+### Run
+
+```
+minikube start
+kubectl apply -f ./mongodb/k8s.yml
+```
+
+**Note**: check for pods ready and running
+
+```
+kubectl get pod
+kubectl get pod --watch
+kubectl get service
+kubectl get all
+```
+
+### Data Seeding
+
+```
+kubectl cp ./shop/src/test/resources/items.json afbb-mongodb-deployment-<pod_id>:/tmp/items.json
+kubectl exec afbb-mongodb-deployment-<pod_id> -- mongoimport -d affablebean -c item --type json --file /tmp/items.json --jsonArray
+```

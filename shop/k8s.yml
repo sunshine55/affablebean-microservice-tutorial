@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: afbb-shop-deployment
+spec:
+  selector:
+    matchLabels: afbb-shop
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: afbb-shop
+    spec:
+      containers:
+      - name: afbb-shop
+        image: afbb/shop:latest
+        ports:
+        - containerPort: 2600
+        env:
+        - name: SPRING_PROFILE
+          value: docker
