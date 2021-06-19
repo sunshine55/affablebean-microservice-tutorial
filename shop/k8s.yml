@@ -19,3 +19,17 @@ spec:
         env:
         - name: SPRING_PROFILE
           value: docker
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: afbb-shop-service
+spec:
+  selector:
+    app: afbb-shop
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 2600
+    targetPort: 2600
+  
