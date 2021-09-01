@@ -2,6 +2,8 @@ target/
 debug/*
 !debug/README.md
 
+### VSCode ###
+.vscode/
 
 ### STS ###
 .apt_generated
