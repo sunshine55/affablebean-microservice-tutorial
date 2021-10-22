@@ -6,7 +6,7 @@ Demonstrate microservice system with Docker and Kubernetes
 
 ## Docker
 
-Given working folder is project root `affablebean-microservice-tutorial`
+Working folder is project root `affablebean-microservice-tutorial`
 
 ```
 git clone https://github.com/sunshine55/affablebean-microservice-tutorial.git
@@ -29,4 +29,4 @@ mvn spring-boot:run
 
 ## Kubernetes
 
-Given working folder is project root `affablebean-microservice-tutorial`
+[Setup Kubernetes cluster with Vagrant](https://gist.github.com/sunshine55/2949a3d333e865f9837542852410eda2)
