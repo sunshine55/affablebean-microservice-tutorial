@@ -1,0 +1,82 @@
+[
+    {
+        "name": "apple",
+        "energy": 10,
+        "category": "fruit"
+    },
+    {
+        "name": "banana",
+        "energy": 15,
+        "category": "fruit"
+    },
+    {
+        "name": "cantaloupe",
+        "energy": 20,
+        "category": "fruit"
+    },
+    {
+        "name": "dragonfruit",
+        "energy": 25,
+        "category": "fruit"
+    },
+    {
+        "name": "beef",
+        "energy": 77,
+        "category": "protein"
+    },
+    {
+        "name": "pork",
+        "energy": 66,
+        "category": "protein"
+    },
+    {
+        "name": "chicken",
+        "energy": 55,
+        "category": "protein"
+    },
+    {
+        "name": "fish",
+        "energy": 22,
+        "category": "protein"
+    },
+    {
+        "name": "water",
+        "energy": 5,
+        "category": "drinks"
+    },
+    {
+        "name": "apple juice",
+        "energy": 9,
+        "category": "drinks"
+    },
+    {
+        "name": "vinegar",
+        "energy": 2,
+        "category": "drinks"
+    },
+    {
+        "name": "wine",
+        "energy": 27,
+        "category": "drinks"
+    },
+    {
+        "name": "bread",
+        "energy": 35,
+        "category": "baking"
+    },
+    {
+        "name": "cookie",
+        "energy": 18,
+        "category": "baking"
+    },
+    {
+        "name": "chips",
+        "energy": 12,
+        "category": "baking"
+    },
+    {
+        "name": "apple pie",
+        "energy": 30,
+        "category": "baking"
+    }
+]
