@@ -1,11 +1,11 @@
 Vagrant.configure("2") do |localdev|
   localdev.vm.box = "ubuntu/focal64"
-  localdev.vm.hostname = "afbb-localdev"
+  localdev.vm.hostname = "localdev"
   localdev.vm.provider "virtualbox" do |vb|
-    vb.memory = 4096
+    vb.memory = 2048
     vb.cpus = 2
   end
   localdev.vm.provision "ansible_local" do |ansible|
-  	ansible.playbook = "localdev-playbook.yml"
+  	ansible.playbook = "localdev/ansible.yml"
   end
 end

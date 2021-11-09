@@ -1,5 +1,5 @@
 ---
-- name: Setup devbox with Desktop Environment using Ansible and Vagrant
+- name: Setup guest machine for remote development
   hosts: all
   become: yes
   tasks:
