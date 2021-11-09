@@ -2,7 +2,7 @@ target/
 debug/*
 !debug/README.md
 .vagrant/
-localdev/ssh_config
+localdev/*/ssh_config
 
 ### VSCode ###
 .vscode/

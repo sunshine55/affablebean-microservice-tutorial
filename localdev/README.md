@@ -13,8 +13,8 @@ Capture the installation state to easy destroy, easy setup whenever devbox is me
 Host machine required: Virutal, Vagrant, VSCode
 
 ```
-mkdir <workspace_directory>/affablebean-microservice-tutorial/localdev
-cd <workspace_directory>/affablebean-microservice-tutorial/localdev
+mkdir <workspace_directory>/affablebean-microservice-tutorial/localdev/guest<n>
+cd <workspace_directory>/affablebean-microservice-tutorial/localdev/guest<n>
 touch ansible.yml
 touch Vagrantfile
 touch ssh_config
