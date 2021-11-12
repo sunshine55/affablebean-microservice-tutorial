@@ -1,0 +1,15 @@
+Vagrant.configure("2") do |mongodb|
+  mongodb.vm.box = "ubuntu/focal64"
+  mongodb.vm.hostname = "afbb-mongodb"
+  mongodb.vm.provider :virtualbox do |vb|
+    vb.memory = 2048
+    vb.cpus = 2
+  end
+  mongodb.vm.network "private_network", ip: "10.0.1.10"
+  mongodb.vm.provision "docker", images: ["mongo:4.4.10"]
+  mongodb.vm.provision "shell", after: "docker", inline: <<-SHELL
+    docker run --restart=always --name afbb-mongodb -p 27017:27017 -d mongo:4.4.10
+    docker cp /vagrant/items.json afbb-mongodb:/tmp/items.json
+    docker exec afbb-mongodb mongoimport -d affablebean -c item --type json --file /tmp/items.json --jsonArray
+  SHELL
+end

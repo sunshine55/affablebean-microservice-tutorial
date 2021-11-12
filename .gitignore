@@ -1,7 +1,12 @@
 target/
 debug/*
 !debug/README.md
+.vagrant/
+localdev/*/ssh_config
+.ssh/
 
+### VSCode ###
+.vscode/
 
 ### STS ###
 .apt_generated
