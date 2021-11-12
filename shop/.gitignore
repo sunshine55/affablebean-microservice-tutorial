@@ -1,0 +1,7 @@
+target/
+debug/
+.vagrant/
+.ssh/
+
+### VSCode ###
+.vscode/

@@ -1,0 +1,11 @@
+Vagrant.configure("2") do |javabox|
+  javabox.vm.box = "ubuntu/focal64"
+  javabox.vm.hostname = "javabox"
+  javabox.vm.provider "virtualbox" do |vb|
+    vb.memory = 2048
+    vb.cpus = 2
+  end
+  javabox.vm.provision "ansible_local" do |ansible|
+  	ansible.playbook = "ansible.yml"
+  end
+end
