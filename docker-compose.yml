@@ -1,0 +1,24 @@
+version: '3'
+services:
+  db:
+    build: afbb-db
+    image: afbb-db
+    container_name: afbb-db
+    volumes:
+      # Mount the root folder that contains .git
+      - .:/workspace:cached
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    ports:
+      - "27017:27017"
+  api:
+    build: afbb-api
+    image: afbb-api
+    container_name: afbb-api
+    volumes:
+      # Mount the root folder that contains .git
+      - .:/workspace:cached
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    ports:
+      - "8080:8080"
+    links:
+      - db:afbb-db
