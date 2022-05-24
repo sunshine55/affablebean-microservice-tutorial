@@ -1,0 +1,102 @@
+[
+    {
+        "name": "dairy",
+        "items": [
+            {
+                "name": "milk",
+                "price": 1.7,
+                "description": "semi skimmed (1L)"
+            },
+            {
+                "name": "cheese",
+                "price": 2.39,
+                "description": "mild cheddar (330g)"
+            },
+            {
+                "name": "butter",
+                "price": 1.09,
+                "description": "unsalted (250g)"
+            },
+            {
+                "name": "eggs",
+                "price": 1.76,
+                "description": "medium sized (6 eggs)"
+            }
+        ]
+    },
+    {
+        "name": "meat",
+        "items": [
+            {
+                "name": "patties",
+                "price": 2.29,
+                "description": "rolled in fresh herbs<br>2 patties (250g)"
+            },
+            {
+                "name": "ham",
+                "price": 3.49,
+                "description": "matured and organic (70g)"
+            },
+            {
+                "name": "chicken",
+                "price": 5.59,
+                "description": "imported (250g)"
+            },
+            {
+                "name": "sausages",
+                "price": 4.55,
+                "description": "reduced fat, pork<br>3 sausages (350g)"
+            }
+        ]
+    },
+    {
+        "name": "bakery",
+        "items": [
+            {
+                "name": "loaf",
+                "price": 1.89,
+                "description": "seedless (250g)"
+            },
+            {
+                "name": "bagel",
+                "price": 7.50,
+                "description": "seedless (70g)"
+            },
+            {
+                "name": "bun",
+                "price": 8.00,
+                "description": "imported (250g)"
+            },
+            {
+                "name": "cookies",
+                "price": 10.11,
+                "description": "imported (12)"
+            }
+        ]
+    },
+    {
+        "name": "veg",
+        "items": [
+            {
+                "name": "watermelon",
+                "price": 1.20,
+                "description": "seedless (250g)"
+            },
+            {
+                "name": "currants",
+                "price": 7.22,
+                "description": "seedless (70g)"
+            },
+            {
+                "name": "broccoli",
+                "price": 3.01,
+                "description": "imported (250g)"
+            },
+            {
+                "name": "corn",
+                "price": 6.77,
+                "description": "imported (12)"
+            }
+        ]
+    }
+]

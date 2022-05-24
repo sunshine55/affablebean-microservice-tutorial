@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  db:
+    build: afbb-db
+    image: afbb-db
+    container_name: afbb-db
+    ports:
+      - "27017:27017"
+  api:
+    build: afbb-api
+    image: afbb-api
+    container_name: afbb-api
+    ports:
+      - "8080:8080"
+    links:
+      - db:afbb-db
