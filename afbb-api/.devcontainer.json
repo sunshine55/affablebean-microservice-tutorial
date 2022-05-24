@@ -5,7 +5,8 @@
     "shutdownAction": "none",
     "extensions": [
         "vscjava.vscode-java-pack",
-        "Pivotal.vscode-boot-dev-pack"
+        "Pivotal.vscode-boot-dev-pack",
+        "GabrielBB.vscode-lombok"
     ],
     // Open the sub-folder with the source code
     "workspaceFolder": "/workspace/afbb-api"

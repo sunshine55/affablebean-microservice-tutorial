@@ -1,24 +1,21 @@
 version: '3'
 services:
   db:
-    build: afbb-db
-    image: afbb-db
+    image: mongo:5.0.8
     container_name: afbb-db
     volumes:
-      # Mount the root folder that contains .git
+      - ./afbb-db/schema:/docker-entrypoint-initdb.d
       - .:/workspace:cached
-    command: /bin/sh -c "while sleep 1000; do :; done"
     ports:
       - "27017:27017"
   api:
-    build: afbb-api
-    image: afbb-api
+    image: maven:3.8.5-openjdk-17
     container_name: afbb-api
     volumes:
-      # Mount the root folder that contains .git
+      - ./afbb-api:/usr/local/src/afbb-api
       - .:/workspace:cached
-    command: /bin/sh -c "while sleep 1000; do :; done"
     ports:
       - "8080:8080"
     links:
       - db:afbb-db
+    command: /bin/sh -c "while sleep 1000; do :; done"

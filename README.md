@@ -21,3 +21,9 @@ Each microservice has diffrent a tech stack.
 Develop microservices with VSCode:
 * Shared development environment with [VSCode devcontainer](https://code.visualstudio.com/docs/remote/create-dev-container)
 * Connect multiple [VSCode devcontainers with Docker Compose](https://code.visualstudio.com/remote/advancedcontainers/connect-multiple-containers)
+
+# Local Development
+
+Prerequisites: Docker, VSCode and Git > VSCode: open folder (afbb-api) in container > this will start all services.
+
+If using Docker Desktop > Dev environments > clone from this repository and open in VSCode
