@@ -1,7 +1,7 @@
 {
     "name": "afbb-api",
     "dockerComposeFile": ["../docker-compose.yml"],
-    "service": "afbb-api",
+    "service": "api",
     "shutdownAction": "none",
     "extensions": [
         "vscjava.vscode-java-pack",

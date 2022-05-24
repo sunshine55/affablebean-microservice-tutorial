@@ -1,7 +1,7 @@
 {
     "name": "afbb-db",
     "dockerComposeFile": ["../docker-compose.yml"],
-    "service": "afbb-db",
+    "service": "db",
     "shutdownAction": "none",
     // Open the sub-folder with the source code
     "workspaceFolder": "/workspace/afbb-db"
