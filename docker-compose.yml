@@ -1,7 +1,7 @@
 version: '3'
 services:
   db:
-    image: mongo:5.0.8
+    image: mongo:latest
     container_name: afbb-db
     volumes:
       - ./afbb-db/schema:/docker-entrypoint-initdb.d
@@ -9,7 +9,7 @@ services:
     ports:
       - "27017:27017"
   api:
-    image: maven:3.8.5-openjdk-17
+    image: maven:latest
     container_name: afbb-api
     volumes:
       - ./afbb-api:/usr/local/src/afbb-api
