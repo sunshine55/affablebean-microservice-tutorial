@@ -26,12 +26,12 @@ services:
   proxy:
     # choose the most lightweight latest tag
     image: nginx:alpine
-    container_name: afbb-gui
+    container_name: afbb-proxy
     volumes:
       # mount the conf to extend nginx.conf
       - ./afbb-proxy/conf:/etc/nginx/config.d
       # serve all the static files built by gui
-      - ./afbb-gui/bundle:/etc/nginx/templates
+      - ./afbb-gui/build:/etc/nginx/templates
       - .:/workspace:cached
     ports:
       - "8080:80"

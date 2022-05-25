@@ -4,7 +4,8 @@
     "service": "gui",
     "shutdownAction": "none",
     "extensions": [
-        "fireloong.react-extension-pack-fireloong"
+        "fireloong.react-extension-pack-fireloong",
+        "Orta.vscode-jest"
     ],
     // Open the sub-folder with the source code
     "workspaceFolder": "/workspace/afbb-gui"
