@@ -3,4 +3,5 @@ spring:
     name: afbb-api
   data:
     mongodb:
+      # host is to db container name
       uri: mongodb://afbb-db:27017/afbb

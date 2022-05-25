@@ -1,21 +1,47 @@
 version: '3'
 services:
   db:
-    image: mongo:latest
+    image: mongo:focal
     container_name: afbb-db
     volumes:
+      # share the schema for seeding data
       - ./afbb-db/schema:/docker-entrypoint-initdb.d
+      # mount root folder to vscode devcontainer to capture git changes
       - .:/workspace:cached
     ports:
       - "27017:27017"
   api:
-    image: maven:latest
+    # choose the most lightweight latest tag
+    image: maven:3-openjdk-18-slim
     container_name: afbb-api
     volumes:
-      - ./afbb-api:/usr/local/src/afbb-api
       - .:/workspace:cached
     ports:
-      - "8080:8080"
+      - "8081:8080"
     links:
+      # share the network for db query <docker-compose-service>:<container-name>
       - db:afbb-db
+    # keep vscode devcontainer alive because this build has no running entrypoint
+    command: /bin/sh -c "while sleep 1000; do :; done"
+  proxy:
+    # choose the most lightweight latest tag
+    image: nginx:alpine
+    container_name: afbb-gui
+    volumes:
+      # mount the conf to extend nginx.conf
+      - ./afbb-proxy/conf:/etc/nginx/config.d
+      # serve all the static files built by gui
+      - ./afbb-gui/bundle:/etc/nginx/templates
+      - .:/workspace:cached
+    ports:
+      - "8080:80"
+    environment:
+      - NGINX_HOST=sunshine55.afbb.com
+      - NGINX_PORT=80
+  gui:
+    # choose the most lightweight latest tag
+    image: node:alpine
+    container_name: afbb-gui
+    volumes:
+      - .:/workspace:cached
     command: /bin/sh -c "while sleep 1000; do :; done"
