@@ -8,5 +8,6 @@
         "Orta.vscode-jest"
     ],
     // Open the sub-folder with the source code
-    "workspaceFolder": "/workspace/afbb-gui"
+    "workspaceFolder": "/workspace/afbb-gui",
+    "remoteUser": "node"
 }
