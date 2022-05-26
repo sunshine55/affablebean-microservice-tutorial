@@ -31,7 +31,7 @@ services:
       # mount the conf to extend nginx.conf
       - ./afbb-proxy/conf:/etc/nginx/config.d
       # serve all the static files built by gui
-      - ./afbb-gui/build:/etc/nginx/templates
+      - ./afbb-gui/store/build:/etc/nginx/templates/store
       - .:/workspace:cached
     ports:
       - "8080:80"
