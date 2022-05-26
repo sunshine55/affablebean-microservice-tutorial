@@ -8,16 +8,12 @@ services:
       - ./afbb-db/schema:/docker-entrypoint-initdb.d
       # mount root folder to vscode devcontainer to capture git changes
       - .:/workspace:cached
-    ports:
-      - "27017:27017"
   api:
     # choose the most lightweight latest tag
     image: maven:3-openjdk-18-slim
     container_name: afbb-api
     volumes:
       - .:/workspace:cached
-    ports:
-      - "8081:8080"
     links:
       # share the network for db query <docker-compose-service>:<container-name>
       - db:afbb-db
@@ -29,19 +25,19 @@ services:
     container_name: afbb-proxy
     volumes:
       # mount the conf to extend nginx.conf
-      - ./afbb-proxy/conf:/etc/nginx/config.d
+      - ./afbb-proxy/conf:/etc/nginx/conf.d
       # serve all the static files built by gui
-      - ./afbb-gui/store-pwa/build:/etc/nginx/templates/store-pwa
+      - ./afbb-gui/store-pwa/build:/var/www/html/store-pwa
       - .:/workspace:cached
     ports:
       - "8080:80"
-    environment:
-      - NGINX_HOST=sunshine55.afbb.com
-      - NGINX_PORT=80
+    links:
+      - api:afbb-api
   gui:
     # choose the most lightweight latest tag
     image: node:alpine
     container_name: afbb-gui
     volumes:
       - .:/workspace:cached
+    # keep vscode devcontainer alive because this build has no running entrypoint
     command: /bin/sh -c "while sleep 1000; do :; done"
