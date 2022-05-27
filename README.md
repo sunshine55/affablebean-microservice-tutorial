@@ -3,6 +3,7 @@ Table of Contents
 - [Overview](#overview)
 - [Services](#services)
 - [Reference](#reference)
+- [Local Development](#local-development)
 
 # Overview
 
@@ -24,6 +25,10 @@ Develop microservices with VSCode:
 
 # Local Development
 
-Prerequisites: Docker, VSCode and Git > VSCode: open folder (afbb-api) in container > this will start all services.
+Prerequisites: Docker, VSCode and Git
+* If `docker compose up -d` first > VSCode: open folder in container > afbb-api
+* If using VSCode: open folder in container > afbb-api > this will start all services.
+* If using Docker Desktop > Dev environments > clone from this repository and open in VSCode
 
-If using Docker Desktop > Dev environments > clone from this repository and open in VSCode
+Tips:
+* `Ctrl+Shift+N` to open new window then open folder in container

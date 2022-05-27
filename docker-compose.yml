@@ -1,21 +1,44 @@
 version: '3'
 services:
   db:
-    image: mongo:5.0.8
+    image: mongo:focal
     container_name: afbb-db
     volumes:
+      # share the schema for seeding data
       - ./afbb-db/schema:/docker-entrypoint-initdb.d
+      # mount root folder to vscode devcontainer to capture git changes
       - .:/workspace:cached
-    ports:
-      - "27017:27017"
   api:
-    image: maven:3.8.5-openjdk-17
+    # choose the most lightweight latest tag
+    image: maven:3-openjdk-18-slim
     container_name: afbb-api
     volumes:
-      - ./afbb-api:/usr/local/src/afbb-api
+      - .:/workspace:cached
+    links:
+      # share the network for db query <docker-compose-service>:<container-name>
+      - db:afbb-db
+    # keep vscode devcontainer alive and available for afbb-proxy at first startup but be rebuilt when code change later
+    working_dir: /workspace/afbb-api
+    command: mvn spring-boot:run
+  proxy:
+    # choose the most lightweight latest tag
+    image: nginx:alpine
+    container_name: afbb-proxy
+    volumes:
+      # mount the conf to extend nginx.conf
+      - ./afbb-proxy/conf:/etc/nginx/conf.d
+      # serve all the static files built by gui
+      - ./afbb-gui/store-pwa/build:/usr/share/nginx/html/store-pwa
       - .:/workspace:cached
     ports:
-      - "8080:8080"
+      - "8080:80"
     links:
-      - db:afbb-db
+      - api:afbb-api
+  gui:
+    # choose the most lightweight latest tag
+    image: node:alpine
+    container_name: afbb-gui
+    volumes:
+      - .:/workspace:cached
+    # keep vscode devcontainer alive because this build has no running entrypoint
     command: /bin/sh -c "while sleep 1000; do :; done"
