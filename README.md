@@ -13,9 +13,10 @@ Each microservice has diffrent a tech stack.
 
 # Services
 
-* afbb-api
-* afbb-db
-* afbb-ui
+* afbb-api: web service
+* afbb-db: mongo db, media contents
+* afbb-gui: PWA React apps
+* afbb-proxy: reverse proxy for api and serve static contents built by gui
 
 # Reference
 
