@@ -17,8 +17,9 @@ services:
     links:
       # share the network for db query <docker-compose-service>:<container-name>
       - db:afbb-db
-    # keep vscode devcontainer alive because this build has no running entrypoint
-    command: /bin/sh -c "while sleep 1000; do :; done"
+    # keep vscode devcontainer alive and available for afbb-proxy at first startup but be rebuilt when code change later
+    working_dir: /workspace/afbb-api
+    command: mvn spring-boot:run
   proxy:
     # choose the most lightweight latest tag
     image: nginx:alpine
@@ -27,7 +28,7 @@ services:
       # mount the conf to extend nginx.conf
       - ./afbb-proxy/conf:/etc/nginx/conf.d
       # serve all the static files built by gui
-      - ./afbb-gui/store-pwa/build:/var/www/html/store-pwa
+      - ./afbb-gui/store-pwa/build:/usr/share/nginx/html/store-pwa
       - .:/workspace:cached
     ports:
       - "8080:80"
