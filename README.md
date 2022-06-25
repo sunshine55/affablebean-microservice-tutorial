@@ -16,6 +16,8 @@ Each microservice has diffrent a tech stack.
 * afbb-api: web service
 * afbb-db: mongo db, media contents
 * afbb-gui: PWA React apps
+  - [store](./afbb-gui/store-pwa/README.md): displays products
+  - admin (work in progress): manage products
 * afbb-proxy: reverse proxy for api and serve static contents built by gui
 
 # Reference
