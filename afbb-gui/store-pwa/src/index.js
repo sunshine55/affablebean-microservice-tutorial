@@ -6,13 +6,17 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import './index.css';
 import './App.css';
-import App from './App';
+import AppBody from './AppBody';
+import AppFooter from './AppFooter';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <div className="App">
+      <AppBody />
+      <AppFooter />
+    </div>
   </React.StrictMode>
 );
 
