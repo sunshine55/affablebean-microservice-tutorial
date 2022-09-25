@@ -35,6 +35,8 @@ Develop microservices with VSCode:
 # Local Development
 
 Prerequisites: Docker, VSCode and Git
+
+Using VSCode to develop with one of these options:
 * If `docker compose up -d` first > VSCode: open folder in container > afbb-api
 * If using VSCode: open folder in container > afbb-api > this will start all services.
 * If using Docker Desktop > Dev environments > clone from this repository and open in VSCode
@@ -42,3 +44,18 @@ Prerequisites: Docker, VSCode and Git
 Tips:
 * `Ctrl+Shift+N` to open new window then open folder in container
 * `docker compose exec -it proxy nginx -s reload` to apply nginx changes
+
+Run the GUI:
+* Open folder `afbb-gui` & `afbb-api` in containers with VSCode (remote development)
+* Build react app:
+```
+cd store-pwa
+npm install
+npm run build
+```
+* Bring up api:
+```
+mvn spring-boot:run
+```
+* Open browser and access via `localhost:8080/store-pwa`
+* API can also be accessed via same port i.e.: `localhost:8080/api/category/getAll`

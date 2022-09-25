@@ -27,6 +27,6 @@ public class CategoryServiceTest {
         Flux<Category> cFlux = Flux.just(c1, c2);
         when(categoryDAO.findAll()).thenReturn(cFlux);
         Flux<Category> actual = categoryService.getAll();
-        StepVerifier.create(actual).expectNext(c1).expectNext(c2).verifyComplete();
+        StepVerifier.create(actual).expectNext(c1, c2).verifyComplete();
     }
 }

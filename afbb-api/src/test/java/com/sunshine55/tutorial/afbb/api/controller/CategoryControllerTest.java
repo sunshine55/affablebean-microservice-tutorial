@@ -27,6 +27,6 @@ public class CategoryControllerTest {
         Flux<Category> cFlux = Flux.just(c1, c2);
         when(categoryService.getAll()).thenReturn(cFlux);
         Flux<Category> actual = categoryController.getAll();
-        StepVerifier.create(actual).expectNext(c1).expectNext(c2).verifyComplete();
+        StepVerifier.create(actual).expectNext(c1, c2).verifyComplete();
     }
 }

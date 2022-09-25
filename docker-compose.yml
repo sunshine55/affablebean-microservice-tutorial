@@ -19,7 +19,9 @@ services:
       - db:afbb-db
     # keep vscode devcontainer alive and available for afbb-proxy at first but be rebuilt with code change later
     working_dir: /workspace/afbb-api
-    command: mvn spring-boot:run
+    # in development, code changes and rebuilds occur frequently hence starting api at entry point will cause port conflict
+    # instead of running `mvn spring-boot:run`, we keeps container run constantly (same as gui)
+    command: /bin/sh -c "while sleep 1000; do :; done"
   proxy:
     # choose the most lightweight latest tag
     image: nginx:alpine
