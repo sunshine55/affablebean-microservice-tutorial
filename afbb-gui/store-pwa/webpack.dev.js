@@ -5,7 +5,10 @@ module.exports = merge(common, {
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
-    static: './public',
+    devMiddleware: {
+      writeToDisk: true
+    },
+    static: './build',
     proxy: {
       '/api': 'http://localhost:8080/api'
     }

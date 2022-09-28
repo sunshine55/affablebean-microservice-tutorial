@@ -1,26 +1,22 @@
 const path = require('path');
 
-const BUILD_DIR = path.resolve(__dirname, './build');
-const LIB_DIR = path.resolve(__dirname, './lib');
-const SOURCE_DIR = path.resolve(__dirname, './src');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const BUILD_DIR = path.resolve(__dirname, 'build');
+const SOURCE_DIR = path.resolve(__dirname, 'src');
 
 const rules = [{
   test: /\.(js|jsx)$/,
-  exclude: /node_modules/,
-  use: {
-    loader: 'babel-loader'
-  }
-}, {
-  test: /\.css$/i,
-  use: ["style-loader", "css-loader"]
-}, {
-  test: /\.(png|jp(e*)g|svg|gif)$/,
-  use: ['file-loader']
+  loader: 'babel-loader',
+  exclude: /node_modules/
 }];
 
 module.exports = {
   entry: {
-    gui_store: [`${SOURCE_DIR}/App.js`]
+    main: [`${SOURCE_DIR}/App.js`]
+  },
+  module: {
+    rules
   },
   output: {
     path: BUILD_DIR,
@@ -28,7 +24,14 @@ module.exports = {
     sourceMapFilename: '[name].map.js',
     clean: true
   },
-  modules: {
-    rules
-  }
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Affable Bean Store',
+      template: `${SOURCE_DIR}/index.html`,
+      inject: false,
+      environment: {
+        PUBLIC_URL: process.env.PUBLIC_URL
+      }
+    })
+  ]
 };
