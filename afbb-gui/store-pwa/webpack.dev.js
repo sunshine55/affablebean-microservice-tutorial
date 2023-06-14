@@ -5,12 +5,10 @@ module.exports = merge(common, {
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
-    devMiddleware: {
-      writeToDisk: true
-    },
-    static: './build',
-    proxy: {
-      '/api': 'http://localhost:8080/api'
-    }
+    proxy: [{
+      context: ['/category'],
+      target: 'http://afbb-api:8080'
+    }],
+    port: 3000
   }
 });

@@ -12,9 +12,10 @@ const App = () => {
 
   useEffect(
     () => {
-      fetch('/api/category/getAll')
-        .then(res => res.json())
-        .then(data => setCategories(data));
+      fetch('/category/getAll')
+        .then(res => res.ok ? res.json() : console.log(res.body))
+        .then(data => setCategories(data))
+        .catch(e => alert(e))
     },
     []
   );

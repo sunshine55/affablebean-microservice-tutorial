@@ -1,7 +1,8 @@
 version: '3'
 services:
   db:
-    image: mongo:focal
+    # choose the most lightweight latest tag
+    image: mongo:jammy
     container_name: afbb-db
     volumes:
       # share the schema for seeding data
@@ -10,37 +11,26 @@ services:
       - .:/workspace:cached
   api:
     # choose the most lightweight latest tag
-    image: maven:3-openjdk-18-slim
+    image: maven:3-openjdk-17-slim
     container_name: afbb-api
     volumes:
+      # mount root folder to vscode devcontainer to capture git changes
       - .:/workspace:cached
-    links:
-      # share the network for db query <docker-compose-service>:<container-name>
-      - db:afbb-db
-    # keep vscode devcontainer alive and available for afbb-proxy at first but be rebuilt with code change later
-    working_dir: /workspace/afbb-api
+    ports:
+      # configure HOST_PORT:CONTAINER_PORT for ingress from outside the swarm
+      - 8080:8080
     # in development, code changes and rebuilds occur frequently hence starting api at entry point will cause port conflict
     # instead of running `mvn spring-boot:run`, we keeps container run constantly (same as gui)
     command: /bin/sh -c "while sleep 1000; do :; done"
-  proxy:
-    # choose the most lightweight latest tag
-    image: nginx:alpine
-    container_name: afbb-proxy
-    volumes:
-      # mount the conf to extend nginx.conf
-      - ./afbb-proxy/conf:/etc/nginx/conf.d
-      # serve all the static files built by gui
-      - ./afbb-gui/store-pwa/build:/usr/share/nginx/html/store-pwa
-      - .:/workspace:cached
-    ports:
-      - "8080:80"
-    links:
-      - api:afbb-api
   gui:
     # choose the most lightweight latest tag
-    image: node:16-alpine
+    image: node:18-alpine
     container_name: afbb-gui
     volumes:
+      # mount root folder to vscode devcontainer to capture git changes
       - .:/workspace:cached
+    ports:
+      # configure HOST_PORT:CONTAINER_PORT for ingress from outside the swarm
+      - 3000:3000
     # keep vscode devcontainer alive because this build has no running entrypoint
     command: /bin/sh -c "while sleep 1000; do :; done"
