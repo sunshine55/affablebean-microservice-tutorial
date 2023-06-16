@@ -1,14 +1,16 @@
 {
-    "name": "afbb-api",
-    "dockerComposeFile": ["../docker-compose.yml"],
-    "service": "api",
-    "shutdownAction": "none",
-    "extensions": [
-        "vscjava.vscode-java-pack",
-        "vscjava.vscode-lombok",
-        "vmware.vscode-spring-boot",
-        "vscjava.vscode-spring-boot-dashboard"
-    ],
-    // Open the sub-folder with the source code
-    "workspaceFolder": "/workspace/afbb-api"
+  "name": "afbb-api",
+  "dockerComposeFile": [
+    "../docker-compose.yml"
+  ],
+  "service": "api",
+  "shutdownAction": "none",
+  "extensions": [
+    "vscjava.vscode-java-pack",
+    "vscjava.vscode-lombok",
+    "vmware.vscode-spring-boot",
+    "vscjava.vscode-spring-boot-dashboard"
+  ],
+  // Open the sub-folder with the source code
+  "workspaceFolder": "/workspace/afbb-api"
 }

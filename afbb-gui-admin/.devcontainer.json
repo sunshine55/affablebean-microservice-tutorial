@@ -1,0 +1,15 @@
+{
+    "name": "afbb-gui-admin",
+    "dockerComposeFile": [
+      "../docker-compose.yml"
+    ],
+    "service": "gui-admin",
+    "shutdownAction": "none",
+    "extensions": [
+      "dsznajder.es7-react-js-snippets"
+    ],
+    // Open the sub-folder with the source code
+    "workspaceFolder": "/workspace/afbb-gui-admin"
+    //"remoteUser": "node"
+    // # OR running `su node` when inside container
+  }

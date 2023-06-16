@@ -26,8 +26,8 @@ Docker compose in this tutorial only works for localhost development only. In or
 * afbb-api: web service
 * afbb-db: mongo db scripts, media contents
 * afbb-gui: PWA React apps
-  - [store](./afbb-gui/store-pwa/README.md): displays products
   - admin (work in progress): manage products
+  - [store](./afbb-gui/store-pwa/README.md): displays products
 * afbb-proxy: serve static contents for other services
 
 # Reference
