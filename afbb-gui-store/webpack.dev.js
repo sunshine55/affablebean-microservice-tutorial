@@ -9,6 +9,6 @@ module.exports = merge(common, {
       context: ['/category'],
       target: 'http://afbb-api:8080'
     }],
-    port: 3000
+    port: 3001
   }
 });

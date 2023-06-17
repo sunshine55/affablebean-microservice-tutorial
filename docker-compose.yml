@@ -43,6 +43,6 @@ services:
       - .:/workspace:cached
     ports:
       # configure HOST_PORT:CONTAINER_PORT for ingress from outside the swarm
-      - 3001:3000
+      - 3001:3001
     # keep vscode devcontainer alive because this build has no running entrypoint
     command: /bin/sh -c "while sleep 1000; do :; done"
