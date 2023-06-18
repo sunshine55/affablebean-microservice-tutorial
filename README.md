@@ -42,7 +42,9 @@ Prerequisites: Docker, VSCode and Git
 
 ## Create the Swarm
 
-Bring up all containers `docker compose up -d`
+Bring up all containers:
+* First time startup: `docker compose up -d` (create/recreate containers, which will download/reinstall vscode extensions for each container; hence, take a while)
+* Next times: `docker compose start`
 
 There are 3 containers orderly created: "afbb-db", "afbb-api" and "afbb-gui" which share the docker-compose network
 
