@@ -9,7 +9,12 @@ const darkTheme = createTheme({ palette: { mode: 'dark' } });
 const App = () => (
   <ThemeProvider theme={darkTheme}>
     <Container fixed>
-      <Box sx={{bgcolor: '#cfe8fc', height: '95vh'}}/>
+      <Box sx={{bgcolor: '#cfe8fc', height: '25vh'}}/>
+      <Box sx={{bgcolor: '#aaa', height: '60vh', display: 'flex'}}>
+        <Box sx={{bgcolor: '#bbb', flexGrow: 1}}/>
+        <Box sx={{bgcolor: '#eee', flexGrow: 2}}/>
+      </Box>
+      <Box sx={{bgcolor: '#cff8fc', height: '10vh'}}/>
     </Container>
   </ThemeProvider>
 );
