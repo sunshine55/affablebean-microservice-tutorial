@@ -3,14 +3,12 @@ import { createRoot } from 'react-dom/client';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { Footer } from './components/Footer';
+import { Body } from './components/Body';
 
 const App = () => (
   <Container maxWidth="lg">
     <Box sx={{ bgcolor: '#cfe8fc', height: '25vh' }} />
-    <Box sx={{ bgcolor: '#aaa', height: '60vh', display: 'flex' }}>
-      <Box sx={{ bgcolor: '#bbb', flexGrow: 1 }} />
-      <Box sx={{ bgcolor: '#eee', flexGrow: 2 }} />
-    </Box>
+    <Box sx={{ height: '60vh'}}><Body/></Box>
     <Box sx={{ height: '10vh' }}><Footer/></Box>
   </Container>
 );
