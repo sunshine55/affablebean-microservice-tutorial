@@ -5,10 +5,7 @@
   ],
   "service": "gui-store",
   "shutdownAction": "none",
-  "extensions": [
-    "dsznajder.es7-react-js-snippets",
-    "vscodeshift.mui-snippets"
-  ],
+  "extensions": [],
   // Open the sub-folder with the source code
   "workspaceFolder": "/workspace/afbb-gui-store"
   //"remoteUser": "node"

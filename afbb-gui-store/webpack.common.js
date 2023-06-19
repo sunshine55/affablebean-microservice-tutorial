@@ -14,8 +14,8 @@ const rules = [{
 
 module.exports = {
   entry: {
-    main: [`${SOURCE_DIR}/App.js`],
-    roboto: [`${SOURCE_DIR}/styles/roboto.js`]
+    roboto: [`${SOURCE_DIR}/styles/roboto.js`],
+    main: [`${SOURCE_DIR}/App.jsx`]
   },
   module: {
     rules
