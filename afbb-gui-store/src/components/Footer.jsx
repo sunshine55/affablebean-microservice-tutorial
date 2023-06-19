@@ -1,6 +1,9 @@
 import React from 'react';
-import Container from '@mui/material/Container'
-import { Box, Paper } from '@mui/material';
+import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
 
-
-export const Footer = () => null;
+export const Footer = () => (
+  <Typography variant="body1" align="center" sx={{margin: '10px'}}>
+    &copy; Developed by <Link href="https://github.com/sunshine55?tab=repositories">sunshine55</Link>
+  </Typography>
+);

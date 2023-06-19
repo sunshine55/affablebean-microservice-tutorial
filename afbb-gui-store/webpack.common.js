@@ -25,5 +25,8 @@ module.exports = {
     filename: '[name].bundle.js',
     sourceMapFilename: '[name].map.js',
     clean: true
+  },
+  resolve: {
+    extensions: ['', '.js', '.jsx']
   }
 };
