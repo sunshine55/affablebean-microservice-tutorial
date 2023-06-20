@@ -17,9 +17,9 @@ Each microservice has diffrent a tech stack.
 
 Docker compose in this tutorial only works for localhost development only. In order to demo on cloud:
 * afbb-api: pom changes to automate cloud deployment
-* afbb-db: media files should be served on CDN, at localhost development it should be mounted as part of `afbb-proxy`
+* afbb-db: media files should be served on CDN, at localhost development it should be mounted as part of `afbb-cdn`
 * afbb-gui: env changes to adapt cloud deployment
-* afbb-proxy: not recommended for cloud deployment, use at localhost development as static content service
+* afbb-cdn: not recommended for cloud deployment, use at localhost development as static content service
 
 # Services
 
@@ -28,7 +28,7 @@ Docker compose in this tutorial only works for localhost development only. In or
 * afbb-gui: PWA React apps
   - admin (work in progress): manage products
   - [store](./afbb-gui/store-pwa/README.md): displays products
-* afbb-proxy: serve static contents for other services
+* afbb-cdn: serve static contents for other services
 
 # Reference
 
@@ -68,5 +68,5 @@ Run in production mode: `npm run build`
 
 ## Bring up the CDN server
 
-1. `Ctrl+Shift+N` > `Ctrl+Shift+P` > "Dev Containers: Open Folder in Container..." > select path to "afbb-proxy" folder
-2. `docker compose exec -it proxy nginx -s reload` to apply nginx changes
+1. `Ctrl+Shift+N` > `Ctrl+Shift+P` > "Dev Containers: Open Folder in Container..." > select path to "afbb-cdn" folder
+2. `docker compose exec -it cdn nginx -s reload` to apply nginx changes

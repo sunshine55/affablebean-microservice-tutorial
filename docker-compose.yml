@@ -22,6 +22,20 @@ services:
     # in development, code changes and rebuilds occur frequently hence starting api at entry point will cause port conflict
     # instead of running `mvn spring-boot:run`, we keeps container run constantly (same as gui)
     command: /bin/sh -c "while sleep 1000; do :; done"
+  cdn:
+    # choose the most lightweight latest tag
+    image: nginx:alpine
+    container_name: afbb-cdn
+    volumes:
+      # mount the conf to extend nginx.conf
+      - ./afbb-cdn/conf:/etc/nginx/conf.d
+      # serve the media resources, content delivery
+      - ./afbb-db/media:/usr/share/nginx/html/media
+      # mount root folder to vscode devcontainer to capture git changes
+      - .:/workspace:cached
+    ports:
+      # configure HOST_PORT:CONTAINER_PORT for ingress from outside the swarm
+      - "8000:80"
   gui-admin:
     # choose the most lightweight latest tag
     image: node:18-alpine

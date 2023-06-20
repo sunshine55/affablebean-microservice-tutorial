@@ -1,101 +1,105 @@
 [
     {
         "name": "dairy",
+        "description": "Eu volutpat odio facilisis mauris sit. Mattis molestie a iaculis at erat. At augue eget arcu dictum varius. Nunc mattis enim ut tellus elementum.",
         "items": [
             {
                 "name": "milk",
                 "price": 1.7,
-                "description": "semi skimmed (1L)"
+                "description": "Semi skimmed milk (1L)"
             },
             {
                 "name": "cheese",
                 "price": 2.39,
-                "description": "mild cheddar (330g)"
+                "description": "Mild cheddar cheese (330g)"
             },
             {
                 "name": "butter",
                 "price": 1.09,
-                "description": "unsalted (250g)"
+                "description": "Unsalted butter (250g)"
             },
             {
                 "name": "eggs",
                 "price": 1.76,
-                "description": "medium sized (6 eggs)"
+                "description": "Medium sized package (6 eggs)"
             }
         ]
     },
     {
         "name": "meat",
+        "description": "Mus mauris ultricies leo. Quis viverra nibh cras pulvinar libero. Egestas integer eget praesent tristique magna. Semper eget duis at tellus at urna.",
         "items": [
             {
                 "name": "patties",
                 "price": 2.29,
-                "description": "rolled in fresh herbs<br>2 patties (250g)"
+                "description": "Rolled in fresh herbs<br>2 patties (250g)"
             },
             {
                 "name": "ham",
                 "price": 3.49,
-                "description": "matured and organic (70g)"
+                "description": "Matured and organic ham (70g)"
             },
             {
                 "name": "chicken",
                 "price": 5.59,
-                "description": "imported (250g)"
+                "description": "Free range chicken whole meat (250g)"
             },
             {
                 "name": "sausages",
                 "price": 4.55,
-                "description": "reduced fat, pork<br>3 sausages (350g)"
+                "description": "Reduced fat, pork, pack of three sausages (350g)"
             }
         ]
     },
     {
         "name": "bakery",
+        "description": "Elementum eu facilisis sed odio morbi quis commodo odio aenean. Vulputate ut pharetra sit amet aliquam. Eu tincidunt tortor aliquam nulla facilisi.",
         "items": [
             {
                 "name": "loaf",
                 "price": 1.89,
-                "description": "seedless (250g)"
+                "description": "Plain white bread (250g)"
             },
             {
                 "name": "bagel",
                 "price": 7.50,
-                "description": "seedless (70g)"
+                "description": "Whole grain bread (70g)"
             },
             {
                 "name": "bun",
                 "price": 8.00,
-                "description": "imported (250g)"
+                "description": "Over baked bread (250g)"
             },
             {
                 "name": "cookies",
                 "price": 10.11,
-                "description": "imported (12)"
+                "description": "Mint chocolate cookies (12)"
             }
         ]
     },
     {
         "name": "veg",
+        "description": "Feugiat scelerisque varius morbi enim. Natoque penatibus magnis dis parturient montes nascetur. Tortor vitae purus faucibus ornare suspendisse sed nisi.",
         "items": [
             {
                 "name": "watermelon",
                 "price": 1.20,
-                "description": "seedless (250g)"
+                "description": "Seedless juicy watermelon (250g)"
             },
             {
                 "name": "currants",
                 "price": 7.22,
-                "description": "seedless (70g)"
+                "description": "Multi purposes black currants (70g)"
             },
             {
                 "name": "broccoli",
                 "price": 3.01,
-                "description": "imported (250g)"
+                "description": "Organic green broccoli (250g)"
             },
             {
                 "name": "corn",
                 "price": 6.77,
-                "description": "imported (12)"
+                "description": "Mixed white and yellow whole kernel corns (12)"
             }
         ]
     }

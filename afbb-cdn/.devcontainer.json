@@ -1,13 +1,13 @@
 {
-  "name": "afbb-proxy",
+  "name": "afbb-cdn",
   "dockerComposeFile": [
     "../docker-compose.yml"
   ],
-  "service": "proxy",
+  "service": "cdn",
   "shutdownAction": "none",
   "extensions": [
     "hangxingliu.vscode-nginx-conf-hint"
   ],
   // Open the sub-folder with the source code
-  "workspaceFolder": "/workspace/afbb-proxy"
+  "workspaceFolder": "/workspace/afbb-cdn"
 }
