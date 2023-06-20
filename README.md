@@ -6,7 +6,9 @@ Table of Contents
 - [Local Development](#local-development)
   - [Create the Swarm](#create-the-swarm)
   - [Bring up the API](#bring-up-the-api)
-  - [Bring up the GUI](#bring-up-the-gui)
+  - [Bring up the GUIs](#bring-up-the-guis)
+    - [Front Store](#front-store)
+    - [Admin Page](#admin-page)
   - [Bring up the CDN server](#bring-up-the-cdn-server)
 
 # Overview
@@ -57,11 +59,22 @@ There are 3 containers orderly created: "afbb-db", "afbb-api" and "afbb-gui" whi
 
 Run with CLI command: `mvn spring-boot:run`
 
-## Bring up the GUI
+## Bring up the GUIs
 
-1. `Ctrl+Shift+N` > `Ctrl+Shift+P` > "Dev Containers: Open Folder in Container..." > select path to "afbb-gui" folder
+### Front Store
+
+1. `Ctrl+Shift+N` > `Ctrl+Shift+P` > "Dev Containers: Open Folder in Container..." > select path to "afbb-gui-store" folder
 2. Wait for container window loading completed, all extensions should be installed (the extension IDs are defined in `.devcontainer.json`)
-3. Go to terminal of the container window: `cd store-pwa` then `npm run dev`
+3. Go to terminal of the container window: `npm run dev`
+4. Open browser on the host: `http://localhost:3001/index.html`
+
+Run in production mode: `npm run build`
+
+### Admin Page
+
+1. `Ctrl+Shift+N` > `Ctrl+Shift+P` > "Dev Containers: Open Folder in Container..." > select path to "afbb-gui-admin" folder
+2. Wait for container window loading completed, all extensions should be installed (the extension IDs are defined in `.devcontainer.json`)
+3. Go to terminal of the container window: `npm run dev`
 4. Open browser on the host: `http://localhost:3000/index.html`
 
 Run in production mode: `npm run build`
