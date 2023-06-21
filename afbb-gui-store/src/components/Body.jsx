@@ -12,8 +12,9 @@ export const Body = () => {
 
   useEffect(() => {
     fetch('/category/getAll')
-      .then(res => res.ok ? res.json() : alert(res.statusText))
-      .then(data => setCategories(data));
+      .then(res => res.ok ? res.json() : Promise.reject(res.statusText))
+      .then(data => setCategories(data))
+      .catch(msg => alert(msg));
   }, []);
 
   return (
@@ -23,8 +24,8 @@ export const Body = () => {
           {
             categories.map(category => (
               <ListItem key={category['id']}>
-                <ListItemAvatar><Avatar><ImageIcon/></Avatar></ListItemAvatar>
-                <ListItemText primary={category['name'].toUpperCase()} secondary="Lorem ipsum dolor sit amet, consectetur adipiscing elit"/>
+                <ListItemAvatar><Avatar src={`/media/categories/${category['name']}.jpg`}/></ListItemAvatar>
+                <ListItemText primary={category['name'].toUpperCase()} secondary={category['description']}/>
               </ListItem>
             ))
           }

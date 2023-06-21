@@ -82,4 +82,6 @@ Run in production mode: `npm run build`
 ## Bring up the CDN server
 
 1. `Ctrl+Shift+N` > `Ctrl+Shift+P` > "Dev Containers: Open Folder in Container..." > select path to "afbb-cdn" folder
-2. `docker compose exec -it cdn nginx -s reload` to apply nginx changes
+2. Wait for container window loading completed, all extensions should be installed (the extension IDs are defined in `.devcontainer.json`)
+3. `docker compose exec -it cdn nginx -s reload` or `nginx -s reload` (if inside container) to reload nginx when making changes
+4. Open browser on the host to check a sample static content, i.e.: `http://localhost:8000/media/categories/bakery.jpg`

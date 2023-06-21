@@ -5,9 +5,7 @@
   ],
   "service": "cdn",
   "shutdownAction": "none",
-  "extensions": [
-    "hangxingliu.vscode-nginx-conf-hint"
-  ],
+  "extensions": [],
   // Open the sub-folder with the source code
   "workspaceFolder": "/workspace/afbb-cdn"
 }
