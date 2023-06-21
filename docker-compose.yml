@@ -14,8 +14,8 @@ services:
     image: maven:3-openjdk-17-slim
     container_name: afbb-api
     volumes:
-      # mount root folder to vscode devcontainer to capture git changes
-      - .:/workspace:cached
+      # mount service folder to vscode devcontainer to capture git changes
+      - ./afbb-api:/workspace/afbb-api:cached
     ports:
       # configure HOST_PORT:CONTAINER_PORT for ingress from outside the swarm
       - 8080:8080
@@ -35,14 +35,14 @@ services:
       - .:/workspace:cached
     ports:
       # configure HOST_PORT:CONTAINER_PORT for ingress from outside the swarm
-      - "8000:80"
+      - "8000:8000"
   gui-admin:
     # choose the most lightweight latest tag
     image: node:18-alpine
     container_name: afbb-gui-admin
     volumes:
-      # mount root folder to vscode devcontainer to capture git changes
-      - .:/workspace:cached
+      # mount service folder to vscode devcontainer to capture git changes
+      - ./afbb-gui-admin:/workspace/afbb-gui-admin:cached
     ports:
       # configure HOST_PORT:CONTAINER_PORT for ingress from outside the swarm
       - 3000:3000
@@ -53,8 +53,8 @@ services:
     image: node:18-alpine
     container_name: afbb-gui-store
     volumes:
-      # mount root folder to vscode devcontainer to capture git changes
-      - .:/workspace:cached
+      # mount service folder to vscode devcontainer to capture git changes
+      - ./afbb-gui-store:/workspace/afbb-gui-store:cached
     ports:
       # configure HOST_PORT:CONTAINER_PORT for ingress from outside the swarm
       - 3001:3001
