@@ -5,8 +5,12 @@
   ],
   "service": "gui-store",
   "shutdownAction": "none",
-  // Open the sub-folder with the source code
-  "workspaceFolder": "/workspace/afbb-gui-store"
-  //"remoteUser": "node"
-  // # OR running `su node` when inside container
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dsznajder.es7-react-js-snippets"
+      ]
+    }
+  },
+  "workspaceFolder": "/workspace"
 }
