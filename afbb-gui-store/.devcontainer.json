@@ -8,7 +8,6 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "dsznajder.es7-react-js-snippets",
         "vscodeshift.mui-snippets"
       ]
     }
