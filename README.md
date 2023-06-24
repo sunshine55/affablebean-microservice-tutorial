@@ -37,6 +37,8 @@ Docker compose in this tutorial only works for localhost development only. In or
 Develop microservices with VSCode:
 * Shared development environment with [VSCode devcontainer](https://code.visualstudio.com/docs/remote/create-dev-container)
 * Connect multiple [VSCode devcontainers with Docker Compose](https://code.visualstudio.com/remote/advancedcontainers/connect-multiple-containers)
+* It's significantly slow if using Docker Desktop for Windows due to file processing between Windows host and Linux container guests, attempt to cache mounted volumes doesn't improve much (see [Stackoverflow topic](https://stackoverflow.com/questions/49060062/running-webpack-dev-server-in-docker-is-significantly-slower-than-on-local-machi)).
+* Workaround: set up workspace in [VirtualBox VM](https://www.virtualbox.org/) with Linux distro (i.e.: [Ubuntu MATE](https://ubuntu-mate.org/)); then install Docker, VSCode...
 
 # Local Development
 

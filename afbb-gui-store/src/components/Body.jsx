@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -39,7 +39,7 @@ const ItemList = ({items}) => {
       </CardActionArea>
     </Card>
   ));
-  return (<Box sx={{ display: 'flex' }}>{children}</Box>)
+  return (<Box sx={{display: 'flex'}}>{children}</Box>)
 };
 
 export const Body = () => {
@@ -59,11 +59,11 @@ export const Body = () => {
   };
 
   return (
-    <Grid container sx={{ height: '100%' }}>
+    <Grid container sx={{height: '100%'}}>
       <Grid item lg={4}>
         <CategoryList categories={categories} onCategoryClick={onCategoryClick}/>
       </Grid>
-      <Grid item lg={8} sx={{ bgcolor: '#eee' }}>
+      <Grid item lg={8} sx={{bgcolor: '#eee'}}>
         <ItemList items={items}/>
       </Grid>
     </Grid>
