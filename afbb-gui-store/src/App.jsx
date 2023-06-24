@@ -7,7 +7,7 @@ import { Body } from './components/Body';
 
 const App = () => (
   <Container maxWidth="lg">
-    <Box sx={{ bgcolor: '#cfe8fc', height: '25vh' }} />
+    <Box sx={{ bgcolor: '#cfe8fc', height: '20vh' }} />
     <Box sx={{ height: '60vh'}}><Body/></Box>
     <Box sx={{ height: '10vh' }}><Footer/></Box>
   </Container>
