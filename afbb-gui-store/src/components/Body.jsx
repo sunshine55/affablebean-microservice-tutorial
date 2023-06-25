@@ -63,7 +63,7 @@ export const Body = () => {
       <Grid item lg={4}>
         <CategoryList categories={categories} onCategoryClick={onCategoryClick}/>
       </Grid>
-      <Grid item lg={8} sx={{bgcolor: '#eee'}}>
+      <Grid item lg={8} sx={{bgcolor: '#defeca'}}>
         <ItemList items={items}/>
       </Grid>
     </Grid>

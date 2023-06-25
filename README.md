@@ -4,6 +4,7 @@ Table of Contents
 - [Services](#services)
 - [Reference](#reference)
 - [Local Development](#local-development)
+  - [Issues](#issues)
   - [Create the Swarm](#create-the-swarm)
   - [Bring up the API](#bring-up-the-api)
   - [Bring up the GUIs](#bring-up-the-guis)
@@ -43,6 +44,14 @@ Develop microservices with VSCode:
 # Local Development
 
 Prerequisites: Docker, VSCode and Git
+
+## Issues
+
+| Issue                                                                        | Cause                                                                           | Workaround                                                                                                                                                                                                        |
+| :--------------------------------------------------------------------------- | :------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Webpack dev server is significantly slow if using Docker Desktop for Windows | Because delay in file processing between Windows host and Linux container guest | 1. Attempt to cache mounted volumes doesn't improve much (see [Stackoverflow topic](https://stackoverflow.com/questions/49060062/running-webpack-dev-server-in-docker-is-significantly-slower-than-on-local-machi)).<br>2. Set up workspace in [VirtualBox VM](https://www.virtualbox.org/) with Linux distro (i.e.: [Ubuntu MATE](https://ubuntu-mate.org/)); then install Prerequisites |
+Unable to start `mongo:latest` container in VirtualBox VM | MongoDB 5+ requires a Sandy Bridge or newer CPU [Stackoverflow topic](https://stackoverflow.com/questions/68392064/error-when-running-mongo-image-docker-entrypoint-sh-line-381) | 1. Get a newer processor<br>2. use an older version of MongoDB<br>3. Wait for MongoDB update the compatability
+
 
 ## Create the Swarm
 

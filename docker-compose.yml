@@ -1,8 +1,8 @@
 version: '3'
 services:
   db:
-    # choose the most lightweight latest tag
-    image: mongo:jammy
+    # use MongoDB 4 because MongoDB 5+ is unable to run in VBox environment
+    image: mongo:4.4.22
     container_name: afbb-db
     volumes:
       # share the schema for seeding data
