@@ -1,0 +1,9 @@
+{
+    "name": "afbb-gui-admin",
+    "dockerComposeFile": [
+      "../docker-compose.yml"
+    ],
+    "service": "gui-admin",
+    "shutdownAction": "none",
+    "workspaceFolder": "/workspace"
+  }

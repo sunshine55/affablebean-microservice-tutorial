@@ -8,7 +8,10 @@ module.exports = merge(common, {
     proxy: [{
       context: ['/category'],
       target: 'http://afbb-api:8080'
+    }, {
+      context: ['/media'],
+      target: 'http://afbb-cdn:8000'
     }],
-    port: 3000
+    port: 3001
   }
 });

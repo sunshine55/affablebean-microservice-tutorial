@@ -1,0 +1,16 @@
+{
+  "name": "afbb-gui-store",
+  "dockerComposeFile": [
+    "../docker-compose.yml"
+  ],
+  "service": "gui-store",
+  "shutdownAction": "none",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscodeshift.mui-snippets"
+      ]
+    }
+  },
+  "workspaceFolder": "/workspace"
+}

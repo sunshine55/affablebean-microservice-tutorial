@@ -1,0 +1,16 @@
+{
+  "name": "afbb-cdn",
+  "dockerComposeFile": [
+    "../docker-compose.yml"
+  ],
+  "service": "cdn",
+  "shutdownAction": "none",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ahmadalli.vscode-nginx-conf"
+      ]
+    }
+  },
+  "workspaceFolder": "/workspace"
+}
