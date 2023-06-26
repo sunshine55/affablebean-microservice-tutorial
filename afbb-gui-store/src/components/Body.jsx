@@ -12,38 +12,46 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 
-// TODO: onCategoryClick should capture category id, OR consider using Router for enhancement
-const CategoryList = ({categories, onCategoryClick}) => {
+const CategoryList = ({categories, selectedCategoryId, onCategoryClick}) => {
   const children = categories.map(category => (
-    <ListItemButton key={category['id']} onClick={onCategoryClick}>
-      <ListItemAvatar><Avatar src={`/media/categories/${category['name']}.jpg`} /></ListItemAvatar>
-      <ListItemText primary={category['name'].toUpperCase()} secondary={category['description']} />
+    <ListItemButton
+      key={category['id']}
+      selected={selectedCategoryId === category['id']}
+      onClick={() => onCategoryClick(category['id'])}>
+      <ListItemAvatar><Avatar src={`/media/categories/${category['name']}.jpg`}/></ListItemAvatar>
+      <ListItemText primary={category['name'].toUpperCase()} secondary={category['description']}/>
     </ListItemButton>
   ));
-  return (<List sx={{ flexGrow: 1, bgcolor: '#bbb' }}>{children}</List>)
+  return (
+    <Grid item md={4}>
+      <List>{children}</List>
+    </Grid>
+  );
 };
 
 const ItemList = ({items}) => {
   const children = items.map(item => (
-    <Card key={item['name']} sx={{flexFlow: 1}}>
+    <Card key={item['name']}>
       <CardActionArea>
-        <CardMedia
-          component="img"
-          image={`/media/items/${item['name']}.png`}
-          alt={item['price']}
-        />
+        <CardMedia component="img" image={`/media/items/${item['name']}.png`}/>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">{item['name'].toUpperCase()}</Typography>
-          <Typography variant="body2" color="text.secondary">{item['description']}</Typography>
+          <Typography variant="body1" color="text.secondary">{item['description']}</Typography>
+          <Typography variant="body2" color="text.secondary">Price: {item['price']}</Typography>
         </CardContent>
       </CardActionArea>
     </Card>
   ));
-  return (<Box sx={{display: 'flex'}}>{children}</Box>)
+  return (
+    <Grid item md={8}>
+      <Box sx={{display: 'flex', pt: '8px'}}>{children}</Box>
+    </Grid>
+  );
 };
 
 export const Body = () => {
   const [categories, setCategories] = useState([]);
+  const [selectedCategoryId, setSelectedCategoryId] = useState('');
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -53,19 +61,21 @@ export const Body = () => {
       .catch(msg => alert(msg));
   }, []);
 
-  const onCategoryClick = (e) => {
-    const {items} = categories[0];
-    setItems(items);
+  const onCategoryClick = (id) => {
+    const selectedCategory = categories.find(c => c['id'] === id);
+    if (selectedCategory !== undefined) {
+      setSelectedCategoryId(id);
+      setItems(selectedCategory['items'] || []);
+    }
   };
 
   return (
-    <Grid container sx={{height: '100%'}}>
-      <Grid item lg={4}>
-        <CategoryList categories={categories} onCategoryClick={onCategoryClick}/>
-      </Grid>
-      <Grid item lg={8} sx={{bgcolor: '#defeca'}}>
-        <ItemList items={items}/>
-      </Grid>
+    <Grid container>
+      <CategoryList
+        categories={categories}
+        selectedCategoryId={selectedCategoryId}
+        onCategoryClick={onCategoryClick}/>
+      <ItemList items={items}/>
     </Grid>
   );
 };

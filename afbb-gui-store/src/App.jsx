@@ -1,16 +1,27 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import { Footer } from './components/Footer';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Body } from './components/Body';
+import { Footer } from './components/Footer';
+import { Header } from './components/Header';
+import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark'
+  }
+});
 
 const App = () => (
-  <Container maxWidth="lg">
-    <Box sx={{ bgcolor: '#cfe8fc', height: '20vh' }} />
-    <Box sx={{ height: '60vh'}}><Body/></Box>
-    <Box sx={{ height: '10vh' }}><Footer/></Box>
-  </Container>
+  <ThemeProvider theme={darkTheme}>
+    <CssBaseline/>
+    <Container maxWidth="lg">
+      <Header/>
+      <Body/>
+      <Footer/>
+    </Container>
+  </ThemeProvider>
 );
 
 const el = document.getElementById('root');
