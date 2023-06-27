@@ -23,7 +23,7 @@ const CategoryList = ({categories, selectedCategoryId, onCategoryClick}) => {
     </ListItemButton>
   ));
   return (
-    <Grid item md={4}>
+    <Grid item md={4} sx={{pr: '2.5px'}}>
       <List>{children}</List>
     </Grid>
   );
@@ -33,7 +33,7 @@ const ItemList = ({items}) => {
   const children = items.map(item => (
     <Card key={item['name']}>
       <CardActionArea>
-        <CardMedia component="img" image={`/media/items/${item['name']}.png`}/>
+        <CardMedia component="img" height="126" image={`/media/items/${item['name']}.png`}/>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">{item['name'].toUpperCase()}</Typography>
           <Typography variant="body1" color="text.secondary">{item['description']}</Typography>
@@ -43,7 +43,7 @@ const ItemList = ({items}) => {
     </Card>
   ));
   return (
-    <Grid item md={8}>
+    <Grid item md={8} sx={{pl: '2.5px'}}>
       <Box sx={{display: 'flex', pt: '8px'}}>{children}</Box>
     </Grid>
   );
