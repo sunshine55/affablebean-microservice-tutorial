@@ -31,6 +31,7 @@ const CategoryList = ({categories, selectedCategoryId, onCategoryClick}) => {
 };
 
 const ItemList = ({items, cart, onItemAction}) => {
+  // TODO: 2 items per row
   const children = items.map(item => {
     const {name, description, price} = item;
     const qty = !!cart[name] ? cart[name] : 0;
