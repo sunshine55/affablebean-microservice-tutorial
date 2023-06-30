@@ -31,30 +31,31 @@ const CategoryList = ({categories, selectedCategoryId, onCategoryClick}) => {
 };
 
 const ItemList = ({items, cart, onItemChange}) => {
-  // TODO: 2 items per row
   const children = items.map(item => {
     const {name, description, price} = item;
     const {qty, total} = cart[name] || {};
     return (
-      <Card key={name}>
-        <CardMedia component="img" height="126" image={`/media/items/${name}.png`}/>
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">{name.toUpperCase()}</Typography>
-          <Typography variant="body1" color="text.secondary">{description}</Typography>
-          <Typography variant="body2" color="text.secondary">Price: {price}</Typography>
-          <Typography variant="body2" color="text.secondary">Quantity: {qty || 0}</Typography>
-          <Typography variant="body2" color="text.secondary">Total: {total || 0}</Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small" onClick={() => onItemChange(name, price, 'add')}>Add</Button>
-          <Button size="small" onClick={() => onItemChange(name, price, 'remove')}>Remove</Button>
-        </CardActions>
-      </Card>
-    )
+      <Box sx={{flexGrow: 1, m: 1}}>
+        <Card key={name}>
+          <CardMedia component="img" image={`/media/items/${name}.png`}/>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">{name.toUpperCase()}</Typography>
+            <Typography variant="body1" color="text.secondary">{description}</Typography>
+            <Typography variant="body2" color="text.secondary">Price: {price}</Typography>
+            <Typography variant="body2" color="text.secondary">Quantity: {qty || 0}</Typography>
+            <Typography variant="body2" color="text.secondary">Total: {total || 0}</Typography>
+          </CardContent>
+          <CardActions>
+            <Button size="small" onClick={() => onItemChange(name, price, 'add')}>Add</Button>
+            <Button size="small" onClick={() => onItemChange(name, price, 'remove')}>Remove</Button>
+          </CardActions>
+        </Card>
+      </Box>
+    );
   });
   return (
-    <Grid item md={8} sx={{pl: '2.5px'}}>
-      <Box sx={{display: 'flex', pt: '8px'}}>{children}</Box>
+    <Grid item md={8} sx={{pl: '2.5px', mt: '8px'}}>
+      <Box sx={{display: 'flex', flexWrap: 'wrap'}}>{children}</Box>
     </Grid>
   );
 };
