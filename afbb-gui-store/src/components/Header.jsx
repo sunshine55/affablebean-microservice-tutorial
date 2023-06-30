@@ -18,7 +18,7 @@ export const Header = ({cart}) => {
     <Box sx={{height: '15vh', m: '10px 0px'}}>
       <Typography variant="h3" gutterBottom>Affable Spring Bean!</Typography>
       <Typography variant="body1" gutterBottom>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Typography>
-      <Stack direction="row-reverse" alignItems="center" spacing={2}>
+      <Stack direction="row-reverse" alignItems="center" sx={{m: 2}}>
         <Badge badgeContent={sumQty} color="warning" anchorOrigin={{vertical: 'top', horizontal: 'left'}}>
           <Button variant="outlined" startIcon={<ShoppingCartIcon/>}>Total: {sumTotal}</Button>
         </Badge>
