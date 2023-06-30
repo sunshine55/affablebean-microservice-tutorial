@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { createRoot } from 'react-dom/client';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Body } from './components/Body';
@@ -13,16 +13,20 @@ const darkTheme = createTheme({
   }
 });
 
-const App = () => (
-  <ThemeProvider theme={darkTheme}>
-    <CssBaseline/>
-    <Container maxWidth="lg">
-      <Header/>
-      <Body/>
-      <Footer/>
-    </Container>
-  </ThemeProvider>
-);
+const App = () => {
+  const [cart, setCart] = useState({});
+
+  return (
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline/>
+      <Container maxWidth="lg">
+        <Header cart={cart}/>
+        <Body cart={cart} onCartChange={setCart}/>
+        <Footer/>
+      </Container>
+    </ThemeProvider>
+  );
+};
 
 const el = document.getElementById('root');
 const root = createRoot(el);

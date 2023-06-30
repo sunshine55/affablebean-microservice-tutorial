@@ -30,12 +30,11 @@ const CategoryList = ({categories, selectedCategoryId, onCategoryClick}) => {
   );
 };
 
-const ItemList = ({items, cart, onItemAction}) => {
+const ItemList = ({items, cart, onItemChange}) => {
   // TODO: 2 items per row
   const children = items.map(item => {
     const {name, description, price} = item;
-    const qty = !!cart[name] ? cart[name] : 0;
-    const total = qty * price;
+    const {qty, total} = cart[name] || {};
     return (
       <Card key={name}>
         <CardMedia component="img" height="126" image={`/media/items/${name}.png`}/>
@@ -43,12 +42,12 @@ const ItemList = ({items, cart, onItemAction}) => {
           <Typography gutterBottom variant="h5" component="div">{name.toUpperCase()}</Typography>
           <Typography variant="body1" color="text.secondary">{description}</Typography>
           <Typography variant="body2" color="text.secondary">Price: {price}</Typography>
-          <Typography variant="body2" color="text.secondary">Quantity: {qty}</Typography>
-          <Typography variant="body2" color="text.secondary">Total: {total}</Typography>
+          <Typography variant="body2" color="text.secondary">Quantity: {qty || 0}</Typography>
+          <Typography variant="body2" color="text.secondary">Total: {total || 0}</Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" name="add" value={item['name']} onClick={onItemAction}>Add</Button>
-          <Button size="small" name="remove" value={item['name']} onClick={onItemAction}>Remove</Button>
+          <Button size="small" onClick={() => onItemChange(name, price, 'add')}>Add</Button>
+          <Button size="small" onClick={() => onItemChange(name, price, 'remove')}>Remove</Button>
         </CardActions>
       </Card>
     )
@@ -60,11 +59,10 @@ const ItemList = ({items, cart, onItemAction}) => {
   );
 };
 
-export const Body = () => {
+export const Body = ({cart, onCartChange}) => {
   const [categories, setCategories] = useState([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState('');
   const [items, setItems] = useState([]);
-  const [cart, setCart] = useState({});
 
   useEffect(() => {
     fetch('/category/getAll')
@@ -81,10 +79,8 @@ export const Body = () => {
     }
   };
 
-  const onItemAction = (e) => {
-    const itemName = e.target.value;
-    const action = e.target.name;
-    let qty = !!cart[itemName] ? cart[itemName] : 0;
+  const onItemChange = (name, price, action) => {
+    let qty = !cart[name] ? 0 : (cart[name]['qty'] || 0);
     if (action === 'add') {
       qty++;
     } else if (action === 'remove') {
@@ -93,8 +89,9 @@ export const Body = () => {
         qty = 0;
       }
     }
-    const nextCart = {...cart, [itemName]: qty};
-    setCart(nextCart);
+    const total = qty * price;
+    const nextCart = Object.assign({}, cart, {[name]: {qty, total}});
+    onCartChange(nextCart);
   };
 
   return (
@@ -106,7 +103,7 @@ export const Body = () => {
       <ItemList
         items={items}
         cart={cart}
-        onItemAction={onItemAction}/>
+        onItemChange={onItemChange}/>
     </Grid>
   );
 };
