@@ -6,7 +6,7 @@ module.exports = merge(common, {
   devtool: 'inline-source-map',
   devServer: {
     proxy: [{
-      context: ['/category'],
+      context: ['/category', '/item'],
       target: 'http://afbb-api:8080'
     }, {
       context: ['/media'],

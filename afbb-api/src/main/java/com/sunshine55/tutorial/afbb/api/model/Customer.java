@@ -8,16 +8,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Document(collection = "item")
+@Document(collection = "customer")
 @Getter @Setter
 @NoArgsConstructor
 @EqualsAndHashCode
-public class Item {
+public class Customer {
     @Id private String id;
 
-    private String name;
-    private String description;
-    private Float price;
-
-    @EqualsAndHashCode.Exclude private Category category;
+    private String fullName, phone, address;
 }
