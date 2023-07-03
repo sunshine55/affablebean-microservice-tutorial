@@ -32,11 +32,11 @@ const CategoryList = ({categories, selectedCategoryId, onCategoryClick}) => {
 
 const ItemList = ({items, cart, onItemChange}) => {
   const children = items.map(item => {
-    const {name, description, price} = item;
-    const {qty, total} = cart[name] || {};
+    const {id, name, description, price} = item;
+    const {qty, total} = cart[id] || {};
     return (
       <Box sx={{flexGrow: 1, m: 1}}>
-        <Card key={name}>
+        <Card key={id}>
           <CardMedia component="img" image={`/media/items/${name}.png`}/>
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">{name.toUpperCase()}</Typography>
@@ -46,8 +46,8 @@ const ItemList = ({items, cart, onItemChange}) => {
             <Typography variant="body2" color="text.secondary">Total: {total || 0}</Typography>
           </CardContent>
           <CardActions>
-            <Button size="small" onClick={() => onItemChange(name, price, 'add')}>Add</Button>
-            <Button size="small" onClick={() => onItemChange(name, price, 'remove')}>Remove</Button>
+            <Button size="small" onClick={() => onItemChange(id, price, 'add')}>Add</Button>
+            <Button size="small" onClick={() => onItemChange(id, price, 'remove')}>Remove</Button>
           </CardActions>
         </Card>
       </Box>
@@ -73,15 +73,14 @@ export const Body = ({cart, onCartChange}) => {
   }, []);
 
   const onCategoryClick = (id) => {
-    const selectedCategory = categories.find(c => c['id'] === id);
-    if (selectedCategory !== undefined) {
-      setSelectedCategoryId(id);
-      setItems(selectedCategory['items'] || []);
-    }
+    fetch(`/item/getByCategoryId?categoryId=${id}`)
+      .then(res => res.ok ? res.json() : Promise.reject(res.statusText))
+      .then(data => setItems(data))
+      .catch(msg => alert(msg));
   };
 
-  const onItemChange = (name, price, action) => {
-    let qty = !cart[name] ? 0 : (cart[name]['qty'] || 0);
+  const onItemChange = (id, price, action) => {
+    let qty = !cart[id] ? 0 : (cart[id]['qty'] || 0);
     if (action === 'add') {
       qty++;
     } else if (action === 'remove') {
@@ -91,7 +90,7 @@ export const Body = ({cart, onCartChange}) => {
       }
     }
     const total = qty * price;
-    const nextCart = Object.assign({}, cart, {[name]: {qty, total}});
+    const nextCart = Object.assign({}, cart, {[id]: {qty, total}});
     onCartChange(nextCart);
   };
 
