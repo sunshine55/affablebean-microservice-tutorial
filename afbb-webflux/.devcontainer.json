@@ -1,14 +1,16 @@
 {
-  "name": "afbb-cdn",
+  "name": "afbb-webflux",
   "dockerComposeFile": [
     "../compose.yml"
   ],
-  "service": "cdn",
+  "service": "webflux",
   "shutdownAction": "none",
   "customizations": {
     "vscode": {
       "extensions": [
-        "ahmadalli.vscode-nginx-conf"
+        "vscjava.vscode-gradle",
+        "vscjava.vscode-java-pack",
+        "vmware.vscode-boot-dev-pack"
       ]
     }
   },
