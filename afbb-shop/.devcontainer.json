@@ -1,0 +1,12 @@
+{
+  "name": "afbb-gui",
+  "dockerComposeFile": ["../compose.yml"],
+  "service": "gui",
+  "shutdownAction": "none",
+  "customizations": {
+    "vscode": {
+      "extensions": ["esbenp.prettier-vscode"]
+    }
+  },
+  "workspaceFolder": "/workspace"
+}
