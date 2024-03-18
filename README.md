@@ -1,18 +1,23 @@
-Table of Contents
+# Affable Bean Microservice Tutorial
 
-- [Overview](#overview)
-- [Services](#services)
-- [Reference](#reference)
-- [Local Development](#local-development)
-  - [Issues](#issues)
-  - [Create the Swarm](#create-the-swarm)
-  - [Bring up the API](#bring-up-the-api)
-  - [Bring up the GUIs](#bring-up-the-guis)
-    - [Front Store](#front-store)
-    - [Admin Page](#admin-page)
-  - [Bring up the CDN server](#bring-up-the-cdn-server)
+<!-- vscode-markdown-toc -->
+* 1. [Overview](#Overview)
+* 2. [Services](#Services)
+* 3. [Reference](#Reference)
+* 4. [Local Development](#LocalDevelopment)
+	* 4.1. [Issues](#Issues)
+	* 4.2. [Create the Swarm](#CreatetheSwarm)
+	* 4.3. [Bring up the APIs](#BringuptheAPIs)
+	* 4.4. [Bring up the GUIs](#BringuptheGUIs)
+	* 4.5. [Bring up CDN server](#BringupCDNserver)
 
-# Overview
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+
+##  1. <a name='Overview'></a>Overview
 
 Breakdown [affablebean-spring-tutorial](https://github.com/sunshine55/affablebean-spring-tutorial) app into microservices and containerize them.
 
@@ -24,7 +29,7 @@ Docker compose in this tutorial only works for localhost development only. In or
 * afbb-shop: env changes to adapt cloud deployment
 * afbb-webflux: use build plugins to automate cloud deployment
 
-# Services
+##  2. <a name='Services'></a>Services
 
 Databases:
 * afbb-db:
@@ -42,7 +47,7 @@ GUIs:
 * afbb-cart: order payment
 
 
-# Reference
+##  3. <a name='Reference'></a>Reference
 
 Develop microservices with VSCode and type-2 hypervisor:
 * Shared development environment with [VSCode devcontainer](https://code.visualstudio.com/docs/remote/create-dev-container)
@@ -50,11 +55,11 @@ Develop microservices with VSCode and type-2 hypervisor:
 * It's significantly slow if using Docker Desktop for Windows due to file processing between Windows host and Linux container guests, attempt to cache mounted volumes doesn't improve much (see [Stackoverflow topic](https://stackoverflow.com/questions/49060062/running-webpack-dev-server-in-docker-is-significantly-slower-than-on-local-machi)).
 * Workaround: set up workspace in [VirtualBox VM](https://www.virtualbox.org/) with Linux distro (i.e.: [Ubuntu MATE](https://ubuntu-mate.org/)); then install Docker, VSCode...
 
-# Local Development
+##  4. <a name='LocalDevelopment'></a>Local Development
 
 Prerequisites: Docker, VSCode and Git (either install on OS or another type-2 hypervisor)
 
-## Issues
+###  4.1. <a name='Issues'></a>Issues
 
 | Issue                                                                        | Cause                                                                           | Workaround                                                                                                                                                                                                        |
 | :--------------------------------------------------------------------------- | :------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -62,7 +67,7 @@ Prerequisites: Docker, VSCode and Git (either install on OS or another type-2 hy
 Unable to start `mongo:latest` container in VirtualBox VM | MongoDB 5+ requires a Sandy Bridge or newer CPU [Stackoverflow topic](https://stackoverflow.com/questions/68392064/error-when-running-mongo-image-docker-entrypoint-sh-line-381) | 1. Use an older version MongoDB v4<br>2. Enable Nested VT-x/AMD-V in VirtualBox
 
 
-## Create the Swarm
+###  4.2. <a name='CreatetheSwarm'></a>Create the Swarm
 
 Bring up all containers:
 * First time startup: `docker compose up -d` (create/recreate containers, which will download/reinstall vscode extensions for each container; hence, take a while)
@@ -70,7 +75,7 @@ Bring up all containers:
 
 All containers __orderly created__ and share the *same network created by docker-compose*
 
-## Bring up the APIs
+###  4.3. <a name='BringuptheAPIs'></a>Bring up the APIs
 
 1. `Ctrl+Shift+N` > `Ctrl+Shift+P` > "Dev Containers: Open Folder in Container..." > select path to an api folder
 2. Wait for container window loading completed, all extensions should be installed (the extension IDs are defined in `.devcontainer.json`)
@@ -79,7 +84,7 @@ All containers __orderly created__ and share the *same network created by docker
 
 Run with CLI command: `mvn spring-boot:run` or `./gradlew bootRun`
 
-## Bring up the GUIs
+###  4.4. <a name='BringuptheGUIs'></a>Bring up the GUIs
 
 1. `Ctrl+Shift+N` > `Ctrl+Shift+P` > "Dev Containers: Open Folder in Container..." > select path to a gui folder
 2. Wait for container window loading completed, all extensions should be installed (the extension IDs are defined in `.devcontainer.json`)
@@ -88,7 +93,7 @@ Run with CLI command: `mvn spring-boot:run` or `./gradlew bootRun`
 
 Run in production mode: `npm run prod`
 
-## Bring up the CDN server
+###  4.5. <a name='BringupCDNserver'></a>Bring up CDN server
 
 1. `Ctrl+Shift+N` > `Ctrl+Shift+P` > "Dev Containers: Open Folder in Container..." > select path to nginx folder
 2. Wait for container window loading completed, all extensions should be installed (the extension IDs are defined in `.devcontainer.json`)
