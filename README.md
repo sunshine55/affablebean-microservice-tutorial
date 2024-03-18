@@ -32,10 +32,10 @@ Docker compose in this tutorial only works for localhost development only. In or
 ##  2. <a name='Services'></a>Services
 
 Databases:
+* afbb-cdn: serve static contents for other GUIs
 * afbb-db:
   - database scripts (MySQL and MongoDB)
   - media contents fetching CDN
-* afbb-cdn: serve static contents for other GUIs
 
 APIs:
 * afbb-web: web service for cart & order GUI
@@ -43,9 +43,8 @@ APIs:
 
 GUIs:
 * afbb-admin: metadata management
+* afbb-cart: cart rendering and checkout
 * afbb-shop: products rendering
-* afbb-cart: order payment
-
 
 ##  3. <a name='Reference'></a>Reference
 
