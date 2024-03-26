@@ -7,7 +7,7 @@ services:
     volumes:
       - ./afbb-db/mongo:/docker-entrypoint-initdb.d
   webflux:
-    image: gradle:8.6.0-jdk21-alpine
+    image: gradle:8.7.0-jdk21-jammy
     container_name: afbb-webflux
     ports:
       - 8080:8080
@@ -20,7 +20,7 @@ services:
     ports:
       - 3306:3306
     environment:
-      - MYSQL_DATABASE=affablebean
+      - MYSQL_DATABASE=afbb
       - MYSQL_ROOT_USERNAME=root
       - MYSQL_ROOT_PASSWORD=password
     volumes:
