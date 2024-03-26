@@ -1,13 +1,13 @@
 services:
   mongo:
-    image: mongo:7.0.7-rc2-jammy
+    image: mongo:7
     container_name: afbb-mongo
     ports:
       - 27017:27017
     volumes:
       - ./afbb-db/mongo:/docker-entrypoint-initdb.d
   webflux:
-    image: gradle:8.7.0-jdk21-jammy
+    image: gradle:8-jdk21
     container_name: afbb-webflux
     ports:
       - 8080:8080
@@ -15,7 +15,7 @@ services:
       - ./afbb-webflux:/workspace:delegated
     command: tail -f /dev/null
   mysql:
-    image: mysql:8.3.0
+    image: mysql:8
     container_name: afbb-mysql
     ports:
       - 3306:3306
@@ -26,7 +26,7 @@ services:
     volumes:
       - ./afbb-db/mysql:/docker-entrypoint-initdb.d
   web:
-    image: maven:3-openjdk-21-slim
+    image: maven:3-openjdk-21
     container_name: afbb-web
     ports:
       - 8081:8081
@@ -42,7 +42,7 @@ services:
       - ./afbb-cdn/conf:/etc/nginx/conf.d
       - ./afbb-db/cdn:/usr/share/nginx/html/media
   shop:
-    image: node:21-alpine
+    image: node:21
     container_name: afbb-shop
     ports:
       - 3000:3000
